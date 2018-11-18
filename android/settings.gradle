@@ -1,0 +1,3 @@
+rootProject.name = 'fast_forward_staff'
+
+include ':app'
