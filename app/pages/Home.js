@@ -105,14 +105,15 @@ export default class Home extends Component<Props> {
                 source={{uri:item.item.imgs[0]}}
                 style={{ width: 88, height: 88, borderRadius: 5 }}
               />
-              <View style={{alignItems:'flex-end',width:"32%"}}>
-                <Text style={{ flex:1,color:'red',fontSize:24 }}>￥ {item.item.sale_price}</Text>
-                <Stepper
-                  style={{flex:1}}
-                  min={0}
-                  defaultValue={item.item.count}
-                  onChange={this.onChanged}
-                />
+              <View style={{flexDirection: 'column',justifyContent:'space-around',width:"50%"}}>
+                <View style={{flexDirection: 'row',justifyContent:'space-between',alignItems:'center',flex:1}}>
+                  <Text style={{fontSize:18,color:'gray'}}>利润:{300}</Text>
+                  <Text style={{color:'red',fontSize:24 }}>￥ {item.item.sale_price}</Text>
+                </View>
+                <View style={{flexDirection: 'row',justifyContent:'space-between',alignItems:'center',flex:1}}>
+                  <Text style={{fontSize:18,color:'gray'}}>库存:{30}</Text>
+                  <Button type='primary' style={{height:34,width:78}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}}>分 享</Button>
+                </View>
               </View>
             </View>
           </Card.Body>
@@ -155,15 +156,5 @@ export default class Home extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  bottom_button_l:{
-    position:"absolute",
-    width:"66%",
-    bottom:0
-  },
-  bottom_button_r:{
-    position:"absolute",
-    width:"34%",
-    bottom:0,
-    right:0
-  }
+
 });
