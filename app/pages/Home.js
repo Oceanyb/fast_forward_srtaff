@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback, AsyncStorage } from 'react-native'
 import { TabBar, Button, Card, Toast, Stepper } from 'antd-mobile-rn'
+import * as WeChat from 'react-native-wechat'
 
 import { XyNavBar } from '../static/libs/MiniXy'
 import _api from '../static/libs/apiRequest'
 
 import $xy from '../static/styles/xyui'
+
+WeChat.registerApp('wx0ff5a6c6cb1f72ac');
 
 type Props = {};
 export default class Home extends Component<Props> {
@@ -75,7 +78,7 @@ export default class Home extends Component<Props> {
     if(_goodData.length>=0){
       return (
         <View style={{ height:"100%"}}>
-          <XyNavBar bgc="#1E78F0" title="主页" style={{ position: 'absolute', width: '100%', zIndex: 999 }} right="分享店铺" onRightPress={()=>this.state.navigation.navigate('StaffList')}></XyNavBar>
+          <XyNavBar bgc="#1E78F0" title="主页" style={{ position: 'absolute', width: '100%', zIndex: 999 }} right="分享店铺" onRightPress={this.shareTest}></XyNavBar>
           <View style={{marginTop:$xy.statusBarH + $xy.navH,marginBottom:5}}>
             <FlatList
               data={this.state.testData}
@@ -112,7 +115,7 @@ export default class Home extends Component<Props> {
                 </View>
                 <View style={{flexDirection: 'row',justifyContent:'space-between',alignItems:'center',flex:1}}>
                   <Text style={{fontSize:18,color:'gray'}}>库存:{30}</Text>
-                  <Button type='primary' style={{height:34,width:78}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}}>分 享</Button>
+                  <Button type='primary' style={{height:34,width:78}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={this.shareTest}>分 享</Button>
                 </View>
               </View>
             </View>
@@ -152,6 +155,26 @@ export default class Home extends Component<Props> {
 //      shop_id:user.shop_id
 //    })
 //    console.log('log',res)
+  }
+  shareTest = () => {
+    console.log('wechat',WeChat);
+    WeChat.isWXAppInstalled()
+    .then((isInstalled) => {
+      if (isInstalled) {
+        //发送授权请求
+        console.log('success');
+        WeChat.shareToSession({
+          title:'微信朋友圈测试链接',
+          description: '分享自:江清清的技术专栏(www.lcode.org)',
+          thumbImage: 'http://mta.zttit.com:8080/images/ZTT_1404756641470_image.jpg',
+          type: 'news',
+          webpageUrl: 'http://www.lcode.org'
+        })
+        .catch((error) => {console.log("sadasfafasfafafaaf")});
+      } else {
+        console.log('fail')
+      }
+    })
   }
 }
 
