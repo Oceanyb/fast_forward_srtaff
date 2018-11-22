@@ -23,49 +23,44 @@ export default class Home extends Component<Props> {
       goodData:[],
       testData:[
         {
-          id:'12106',
-          detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          sale_price:'22588',
-          cost_price:'1288',
-          agent_price:'1388',
-          count:'8',
-          imgs:['file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg','file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg']
-        },
-        {
-          id:'12107',
-          detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          sale_price:'1008',
-          cost_price:'1288',
-          agent_price:'1388',
-          count:'83',
-          imgs:['file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg','file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg']
+          id:'12108',
+          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
+          price_sale:'1958',
+          price_agent:'1388',
+          stock:'8',
+          imgs:['01639e559dec1232f875370ae2497f.jpg','018f19559deb796ac7257aea2d2084.jpg','0170c6559deb7d6ac7257aea5a1a93.jpg']
         },
         {
           id:'12108',
-          detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          sale_price:'1058',
-          cost_price:'1288',
-          agent_price:'1388',
-          count:'8',
-          imgs:['file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg','file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg']
+          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
+          price_sale:'1458',
+          price_agent:'1388',
+          stock:'8',
+          imgs:['0170c6559deb7d6ac7257aea5a1a93.jpg','01639e559dec1232f875370ae2497f.jpg','018f19559deb796ac7257aea2d2084.jpg']
+        },
+        {
+          id:'12108',
+          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
+          price_sale:'1058',
+          price_agent:'998',
+          stock:'8',
+          imgs:['018f19559deb796ac7257aea2d2084.jpg','0170c6559deb7d6ac7257aea5a1a93.jpg','01639e559dec1232f875370ae2497f.jpg']
         },
         {
           id:'12109',
-          detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          sale_price:'1698',
-          cost_price:'1288',
-          agent_price:'1388',
-          count:'2',
-          imgs:['file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg','file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg']
+          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
+          price_sale:'1698',
+          price_agent:'1388',
+          stock:'2',
+          imgs:['0170c6559deb7d6ac7257aea5a1a93.jpg','018f19559deb796ac7257aea2d2084.jpg','01639e559dec1232f875370ae2497f.jpg']
         },
         {
           id:'12110',
-          detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          sale_price:'1588',
-          cost_price:'1288',
-          agent_price:'1388',
-          count:'8',
-          imgs:['file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg','file:///data/user/0/com.fast_forward_app/cache/react-native-image-crop-picker/IMG_20181025_165113.jpg']
+          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
+          price_sale:'1588',
+          price_agent:'1388',
+          stock:'8',
+          imgs:['0170c6559deb7d6ac7257aea5a1a93.jpg','01639e559dec1232f875370ae2497f.jpg','018f19559deb796ac7257aea2d2084.jpg']
         }
       ]
     }
@@ -97,25 +92,25 @@ export default class Home extends Component<Props> {
   }
   _renderItem = (item) => {
     return(
-      <TouchableWithoutFeedback onPress={()=>{this.state.navigation.navigate('GoodDetail',{details:item.item}),console.log(item)}}>
+      <TouchableWithoutFeedback onPress={()=>{this.state.navigation.navigate('GoodDetail',{goodDetails:item.item}),console.log(item)}}>
         <Card style={{margin:3}}>
           <Card.Header
-            title={<Text style={{fontSize:18}}>{item.item.detail}</Text>}
+            title={<Text style={{fontSize:18}}>{item.item.name}</Text>}
           />
           <Card.Body>
             <View style={{flexDirection: 'row',justifyContent:'space-between', marginLeft: 16,marginRight:16}}>
               <Image
-                source={{uri:item.item.imgs[0]}}
+                source={{uri:`http://img.zcool.cn/community/${item.item.imgs[0]}`}}
                 style={{ width: 88, height: 88, borderRadius: 5 }}
               />
               <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',width:"50%"}}>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-start',height:88,marginRight:8}}>
-                  <Text style={{fontSize:18,color:'gray'}}>利润:{300}</Text>
-                  <Text style={{fontSize:18,color:'gray'}}>库存:{30}</Text>
+                  <Text style={{fontSize:18,color:'gray'}}>利润:{item.item.price_sale-item.item.price_agent}</Text>
+                  <Text style={{fontSize:18,color:'gray'}}>库存:{item.item.stock}</Text>
                 </View>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
-                  <Text style={{color:'red',fontSize:24 }}>￥{item.item.sale_price}</Text>
-                  <Button type='primary' style={{height:34,width:88}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={this.shareTest}>分 享</Button>
+                  <Text style={{color:'red',fontSize:24 }}>￥{item.item.price_sale}</Text>
+                  <Button type='primary' style={{height:34,width:82}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={this.shareTest}>分 享</Button>
                 </View>
               </View>
             </View>
@@ -132,7 +127,7 @@ export default class Home extends Component<Props> {
     this.props.navigation.replace('Home')
     let timer =  setTimeout(()=>{
       clearTimeout(timer)
-        Toast.info('刷新成功!',2)
+        Toast.info('刷新成功!',1)
       },1000)
   }
   onChanged=(value)=>{
@@ -150,11 +145,16 @@ export default class Home extends Component<Props> {
     } catch (e) {
       console.log(e)
     }
-//    console.log('==',user.shop_id)
-//    const res = await _api.get('/moment.onsale',{
-//      shop_id:user.shop_id
-//    })
-//    console.log('log',res)
+    // console.log('==',user.shop_id)
+    // const res = await _api.get('/moment.onsale',{
+    //   shop_id:user.shop_id
+    //  })
+    // console.log('log',res)
+    // if(res){
+    //   this.setState({
+    //     goodData:res
+    //   })
+    // }
   }
   shareTest = () => {
     console.log('wechat',WeChat);

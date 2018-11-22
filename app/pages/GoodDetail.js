@@ -3,6 +3,7 @@ import { View, Text, Image, ScrollView, Modal, TouchableWithoutFeedback } from '
 import { Button, Card } from 'antd-mobile-rn'
 
 import { XyNavBar } from '../static/libs/MiniXy'
+import _api from '../static/libs/apiRequest'
 import ImageViewer from 'react-native-image-zoom-viewer'
 
 import $xy from '../static/styles/xyui'
@@ -18,6 +19,9 @@ export default class GoodDetail extends Component<Props> {
       ...props,
       visible:false,
       clickNum:'',
+      details:{},
+      imgs:[],
+      imgsView:[],
       imgsTest:[{url:'http://img.zcool.cn/community/01639e559dec1232f875370ae2497f.jpg'},{url:'http://img.zcool.cn/community/0170c6559deb7d6ac7257aea5a1a93.jpg'},{url:'http://img.zcool.cn/community/018f19559deb796ac7257aea2d2084.jpg'}]
     }
   }
@@ -29,21 +33,21 @@ export default class GoodDetail extends Component<Props> {
         <ScrollView style={{marginBottom:50}}>
           <Card full>
             <Card.Header
-              title={<Text style={{fontSize:18}}>有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869</Text>}
+              title={<Text style={{fontSize:18}}>{this.state.details.name}</Text>}
             />
             <Card.Body>
               <View style={{flexDirection: 'row',justifyContent:'space-between', marginLeft: 16,marginRight:16}}>
                 <Image
-                  source={{uri:''}}
+                  source={{uri:`http://img.zcool.cn/community/${this.props.navigation.state.params.goodDetails.imgs[0]}`}}
                   style={{ width: 88, height: 88, borderRadius: 5 }}
                 />
                 <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',width:"50%"}}>
                   <View style={{flexDirection: 'column',justifyContent:'flex-end',height:88,marginRight:10}}>
-                    <Text style={{fontSize:18,color:'gray',paddingBottom:10}}>库存:{30}</Text>
+                    <Text style={{fontSize:18,color:'gray',paddingBottom:10}}>库存:{this.state.details.stock}</Text>
                   </View>
                   <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
-                    <Text style={{color:'red',fontSize:24 }}>￥{10692}</Text>
-                    <Text style={{fontSize:18,color:'gray'}}>利润:{300}</Text>
+                    <Text style={{color:'red',fontSize:24 }}>￥{this.state.details.price_sale}</Text>
+                    <Text style={{fontSize:18,color:'gray'}}>利润:{this.state.details.price_sale - this.state.details.price_agent}</Text>
                   </View>
                 </View>
               </View>
@@ -53,7 +57,7 @@ export default class GoodDetail extends Component<Props> {
             </View>
             <View style={{marginTop:10}}>
               <Text style={{fontSize:20,margin:16}}>商品详情</Text>
-              {this.state.imgsTest.map((item,index) =>
+              {this.state.imgs.map((item,index) =>
                 <TouchableWithoutFeedback onPress={() => this.imgClick(index)}  key={index}>
                   <Image source={{uri:item.url}} style={{height:667,margin:5}}/>    
                 </TouchableWithoutFeedback>
@@ -68,7 +72,7 @@ export default class GoodDetail extends Component<Props> {
           onRequestClose={() => {}}
         >
           <ImageViewer
-            imageUrls={this.state.imgsTest}
+            imageUrls={this.state.imgsView}
             enableImageZoom={true}
             index={this.state.clickNum}
             onChange={(index) => {}}
@@ -83,13 +87,27 @@ export default class GoodDetail extends Component<Props> {
     )
   }
   componentDidMount = () => {
-    
+    console.log("||||",this.props)
+    const goodDetails = this.props.navigation.state.params.goodDetails
+    console.log("||||||||",goodDetails)
+    const imgs = []
+    const imgsView = []
+    for(const i in goodDetails.imgs){
+      const v = goodDetails.imgs[i]
+      imgs.push({url:`http://img.zcool.cn/community/${v}`, id: new Date().getTime(), data: '', fileName: v })
+      imgsView.push({url:`http://img.zcool.cn/community/${v}`})
+    }
+    this.setState({
+      details:goodDetails,
+      imgs,
+      imgsView
+    })
+    console.log('ig',this.state.imgsView)
   }
   imgSize = () => {
     Image.getSize('http://img.zcool.cn/community/0170c6559deb7d6ac7257aea5a1a93.jpg',(width,height) => {})
   }
   imgClick = (v) => {
-    console.log('|||||||||');
     this.setState({
       clickNum: v,
       visible:true
