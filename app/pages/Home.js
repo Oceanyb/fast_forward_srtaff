@@ -25,7 +25,7 @@ export default class Home extends Component<Props> {
         {
           id:'12106',
           detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          sale_price:'1588',
+          sale_price:'22588',
           cost_price:'1288',
           agent_price:'1388',
           count:'8',
@@ -108,14 +108,14 @@ export default class Home extends Component<Props> {
                 source={{uri:item.item.imgs[0]}}
                 style={{ width: 88, height: 88, borderRadius: 5 }}
               />
-              <View style={{flexDirection: 'column',justifyContent:'space-around',width:"50%"}}>
-                <View style={{flexDirection: 'row',justifyContent:'space-between',alignItems:'center',flex:1}}>
+              <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',width:"50%"}}>
+                <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-start',height:88,marginRight:8}}>
                   <Text style={{fontSize:18,color:'gray'}}>利润:{300}</Text>
-                  <Text style={{color:'red',fontSize:24 }}>￥ {item.item.sale_price}</Text>
-                </View>
-                <View style={{flexDirection: 'row',justifyContent:'space-between',alignItems:'center',flex:1}}>
                   <Text style={{fontSize:18,color:'gray'}}>库存:{30}</Text>
-                  <Button type='primary' style={{height:34,width:78}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={this.shareTest}>分 享</Button>
+                </View>
+                <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
+                  <Text style={{color:'red',fontSize:24 }}>￥ {item.item.sale_price}</Text>
+                  <Button type='primary' style={{height:34,width:88}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={this.shareTest}>分 享</Button>
                 </View>
               </View>
             </View>
