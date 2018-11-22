@@ -29,7 +29,7 @@ export default class GoodDetail extends Component<Props> {
         <ScrollView style={{marginBottom:50}}>
           <Card full>
             <Card.Header
-              title={<Text style={{fontSize:18}}>safdsgaetyrhfbfgfhgfjdhf dsfsfhfgjd sfa sdsasttasf </Text>}
+              title={<Text style={{fontSize:18}}>有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869</Text>}
             />
             <Card.Body>
               <View style={{flexDirection: 'row',justifyContent:'space-between', marginLeft: 16,marginRight:16}}>
@@ -37,12 +37,12 @@ export default class GoodDetail extends Component<Props> {
                   source={{uri:''}}
                   style={{ width: 88, height: 88, borderRadius: 5 }}
                 />
-                <View style={{flexDirection: 'column',justifyContent:'space-around',width:"50%"}}>
-                  <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',flex:1}}>
-                    <Text style={{color:'red',fontSize:24 }}>￥ {10692}</Text>
+                <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',width:"50%"}}>
+                  <View style={{flexDirection: 'column',justifyContent:'flex-end',height:88,marginRight:10}}>
+                    <Text style={{fontSize:18,color:'gray',paddingBottom:10}}>库存:{30}</Text>
                   </View>
-                  <View style={{flexDirection: 'row',justifyContent:'space-between',alignItems:'center',flex:1}}>
-                    <Text style={{fontSize:18,color:'gray'}}>库存:{30}</Text>
+                  <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
+                    <Text style={{color:'red',fontSize:24 }}>￥ {10692}</Text>
                     <Text style={{fontSize:18,color:'gray'}}>利润:{300}</Text>
                   </View>
                 </View>
