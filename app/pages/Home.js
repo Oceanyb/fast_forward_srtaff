@@ -114,7 +114,7 @@ export default class Home extends Component<Props> {
                   <Text style={{fontSize:18,color:'gray'}}>库存:{30}</Text>
                 </View>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
-                  <Text style={{color:'red',fontSize:24 }}>￥ {item.item.sale_price}</Text>
+                  <Text style={{color:'red',fontSize:24 }}>￥{item.item.sale_price}</Text>
                   <Button type='primary' style={{height:34,width:88}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={this.shareTest}>分 享</Button>
                 </View>
               </View>

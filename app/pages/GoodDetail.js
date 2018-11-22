@@ -42,7 +42,7 @@ export default class GoodDetail extends Component<Props> {
                     <Text style={{fontSize:18,color:'gray',paddingBottom:10}}>库存:{30}</Text>
                   </View>
                   <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
-                    <Text style={{color:'red',fontSize:24 }}>￥ {10692}</Text>
+                    <Text style={{color:'red',fontSize:24 }}>￥{10692}</Text>
                     <Text style={{fontSize:18,color:'gray'}}>利润:{300}</Text>
                   </View>
                 </View>
