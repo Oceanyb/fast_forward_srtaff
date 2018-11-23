@@ -145,11 +145,11 @@ export default class Home extends Component<Props> {
     } catch (e) {
       console.log(e)
     }
-    // console.log('==',user.shop_id)
+    console.log('==',user.shop_id)
     // const res = await _api.get('/moment.onsale',{
     //   shop_id:user.shop_id
     //  })
-    // console.log('log',res)
+    // console.log(res.headers.get('content-type'))
     // if(res){
     //   this.setState({
     //     goodData:res
