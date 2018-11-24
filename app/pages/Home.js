@@ -22,6 +22,7 @@ export default class Home extends Component<Props> {
       ...props,
       detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
       goodData:[],
+      user:{},
       testData:[
         {
           id:'12108',
@@ -71,13 +72,13 @@ export default class Home extends Component<Props> {
     console.log(this.state.goodData)
     const _goodData=this.state.goodData
     const { navigate } = this.props.navigation;
-    if(_goodData.length>=0){
+    if(this.state.user.shop_id){
       return (
         <View style={{ height:"100%"}}>
           <XyNavBar bgc="#1E78F0" title="主页" style={{ position: 'absolute', width: '100%', zIndex: 999 }} right="分享店铺" onRightPress={this.shareShop}></XyNavBar>
           <View style={{marginTop:$xy.statusBarH + $xy.navH,marginBottom:5}}>
             <FlatList
-              data={this.state.testData}
+              data={_goodData}
               renderItem={this._renderItem}
               refreshing={false}
               onRefresh={this.refreshing}
@@ -101,7 +102,7 @@ export default class Home extends Component<Props> {
           <Card.Body>
             <View style={{flexDirection: 'row',justifyContent:'space-between', marginLeft: 16,marginRight:16}}>
               <Image
-                source={{uri:`http://img.zcool.cn/community/${item.item.imgs[0]}`}}
+                source={{uri:`http://aisuichu.com:7001/public/upload/${item.item.imgs.split(',')[0]}`}}
                 style={{ width: 88, height: 88, borderRadius: 5 }}
               />
               <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',width:"50%"}}>
@@ -157,15 +158,16 @@ export default class Home extends Component<Props> {
       console.log(e)
     }
     console.log('==',user.shop_id)
-    // const res = await _api.get('/moment.onsale',{
-    //   shop_id:user.shop_id
-    //  })
-    // console.log(res.headers.get('content-type'))
-    // if(res){
-    //   this.setState({
-    //     goodData:res
-    //   })
-    // }
+    const res = await _api.get('/moment.onsale',{
+      shop_id:user.shop_id
+     })
+    console.log(res)
+    if(res){
+      this.setState({
+        user:user,
+        goodData:res
+      })
+    }
   }
   shareShop = () => {
     WeChat.isWXAppInstalled()
@@ -208,11 +210,11 @@ export default class Home extends Component<Props> {
           { text: '朋友圈(多图)', onPress: async () => {
             if(Platform.OS === 'android'){
               const storeLocation = `${RNFS.ExternalDirectoryPath}`;
-              for(let i in v.item.imgs){
+              for(let i in v.item.imgs.split(',')){
                 let pathName = new Date().getTime() + ".png"
                 let downloadDest = `${storeLocation}/${pathName}`;
                 const ret = RNFS.downloadFile({
-                  fromUrl:`http://img.zcool.cn/community/${v.item.imgs[i]}`,
+                  fromUrl:`http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[i]}`,
                   toFile:downloadDest
                 });
                 ret.promise.then(res => {
@@ -229,8 +231,8 @@ export default class Home extends Component<Props> {
               }
               WeChat.openWXApp()
             }else{
-              for(let i in v.item.imgs){
-                const fromUrl = `http://img.zcool.cn/community/${v.item.imgs[i]}`
+              for(let i in v.item.imgs.split(',')){
+                const fromUrl = `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[i]}`
                 var promise = CameraRoll.saveToCameraRoll(fromUrl);
                 promise.then(function(result) {
                   console.log("图片已保存至相册")
@@ -246,7 +248,7 @@ export default class Home extends Component<Props> {
             WeChat.shareToTimeline({
             title:'微信朋友圈测试链接',
             description: '分享自:江清清的技术专栏(www.lcode.org)',
-            thumbImage: `http://img.zcool.cn/community/${v.item.imgs[0]}`,
+            thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
             type: 'news',
             webpageUrl: 'http://www.lcode.org'
           })
@@ -255,7 +257,7 @@ export default class Home extends Component<Props> {
             WeChat.shareToSession({
             title:'微信好友测试链接',
             description: '分享自:江清清的技术专栏(www.lcode.org)',
-            thumbImage: `http://img.zcool.cn/community/${v.item.imgs[0]}`,
+            thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
             type: 'news',
             webpageUrl: 'http://www.lcode.org'
           })

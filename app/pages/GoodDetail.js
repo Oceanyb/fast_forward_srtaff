@@ -38,7 +38,7 @@ export default class GoodDetail extends Component<Props> {
             <Card.Body>
               <View style={{flexDirection: 'row',justifyContent:'space-between', marginLeft: 16,marginRight:16, marginTop:5 }}>
                 <Image
-                  source={{uri:`http://img.zcool.cn/community/${this.props.navigation.state.params.goodDetails.imgs[0]}`}}
+                  source={{uri:`http://aisuichu.com:7001/public/upload/${this.props.navigation.state.params.goodDetails.imgs.split(',')[0]}`}}
                   style={{ width: 88, height: 88, borderRadius: 5 }}
                 />
                 <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',width:"50%"}}>
@@ -75,6 +75,7 @@ export default class GoodDetail extends Component<Props> {
             imageUrls={this.state.imgsView}
             enableImageZoom={true}
             index={this.state.clickNum}
+            saveToLocalByLongPress={false}
             onChange={(index) => {}}
             onClick={() => {
               this.setState({
@@ -92,10 +93,10 @@ export default class GoodDetail extends Component<Props> {
     console.log("||||||||",goodDetails)
     const imgs = []
     const imgsView = []
-    for(const i in goodDetails.imgs){
-      const v = goodDetails.imgs[i]
-      imgs.push({url:`http://img.zcool.cn/community/${v}`, id: new Date().getTime(), data: '', fileName: v })
-      imgsView.push({url:`http://img.zcool.cn/community/${v}`})
+    for(const i in goodDetails.imgs.split(',')){
+      const v = goodDetails.imgs.split(',')[i]
+      imgs.push({url:`http://aisuichu.com:7001/public/upload/${v}`, id: new Date().getTime(), data: '', fileName: v })
+      imgsView.push({url:`http://aisuichu.com:7001/public/upload/${v}`})
     }
     this.setState({
       details:goodDetails,
