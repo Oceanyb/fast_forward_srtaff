@@ -36,7 +36,7 @@ export default class GoodDetail extends Component<Props> {
               title={<Text style={{fontSize:18}}>{this.state.details.name}</Text>}
             />
             <Card.Body>
-              <View style={{flexDirection: 'row',justifyContent:'space-between', marginLeft: 16,marginRight:16}}>
+              <View style={{flexDirection: 'row',justifyContent:'space-between', marginLeft: 16,marginRight:16, marginTop:5 }}>
                 <Image
                   source={{uri:`http://img.zcool.cn/community/${this.props.navigation.state.params.goodDetails.imgs[0]}`}}
                   style={{ width: 88, height: 88, borderRadius: 5 }}

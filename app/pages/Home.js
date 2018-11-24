@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback, AsyncStorage } from 'react-native'
-import { TabBar, Button, Card, Toast, Stepper } from 'antd-mobile-rn'
+import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback, AsyncStorage, Platform } from 'react-native'
+import { TabBar, Button, Card, Toast, Stepper, ActionSheet } from 'antd-mobile-rn'
 import * as WeChat from 'react-native-wechat'
 
 import { XyNavBar } from '../static/libs/MiniXy'
@@ -73,7 +73,7 @@ export default class Home extends Component<Props> {
     if(_goodData.length>=0){
       return (
         <View style={{ height:"100%"}}>
-          <XyNavBar bgc="#1E78F0" title="主页" style={{ position: 'absolute', width: '100%', zIndex: 999 }} right="分享店铺" onRightPress={this.shareTest}></XyNavBar>
+          <XyNavBar bgc="#1E78F0" title="主页" style={{ position: 'absolute', width: '100%', zIndex: 999 }} right="分享店铺" onRightPress={this.showShareActionSheet}></XyNavBar>
           <View style={{marginTop:$xy.statusBarH + $xy.navH,marginBottom:5}}>
             <FlatList
               data={this.state.testData}
@@ -110,7 +110,7 @@ export default class Home extends Component<Props> {
                 </View>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
                   <Text style={{color:'red',fontSize:24 }}>￥{item.item.price_sale}</Text>
-                  <Button type='primary' style={{height:34,width:82}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={this.shareTest}>分 享</Button>
+                  <Button type='primary' style={{height:34,width:82}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={() => this.shareTest(item)}>分 享</Button>
                 </View>
               </View>
             </View>
@@ -156,7 +156,35 @@ export default class Home extends Component<Props> {
     //   })
     // }
   }
-  shareTest = () => {
+  showShareActionSheet = () => {
+    const opts: any = {
+      message: 'Message to go with the shared url',
+      title: 'Share Actionsheet',
+    };
+    console.log('sadasd',opts)
+
+    if (Platform.OS === 'ios') {
+      opts.url = 'https://www.alipay.com/';
+      opts.tintColor = '#ff0000';
+      opts.excludedActivityTypes = ['com.apple.UIKit.activity.PostToTwitter'];
+    }
+
+    ActionSheet.showShareActionSheetWithOptions(
+      opts,
+      (error: any) => alert(error),
+      (success: any, method: any) => {
+        let text;
+        if (success) {
+          text = `Shared with ${method}`;
+        } else {
+          text = 'Did not share';
+        }
+        this.setState({ text });
+      },
+    );
+  }
+  shareTest = (v) => {
+    console.log('item',v)
     console.log('wechat',WeChat);
     WeChat.isWXAppInstalled()
     .then((isInstalled) => {
@@ -166,11 +194,11 @@ export default class Home extends Component<Props> {
         WeChat.shareToSession({
           title:'微信朋友圈测试链接',
           description: '分享自:江清清的技术专栏(www.lcode.org)',
-          thumbImage: 'http://mta.zttit.com:8080/images/ZTT_1404756641470_image.jpg',
+          thumbImage: `http://img.zcool.cn/community/${v.item.imgs[0]}`,
           type: 'news',
           webpageUrl: 'http://www.lcode.org'
         })
-        .catch((error) => {console.log("sadasfafasfafafaaf")});
+        .catch((error) => {console.log("error")});
       } else {
         console.log('fail')
       }
