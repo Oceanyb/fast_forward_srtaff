@@ -228,6 +228,18 @@ export default class Home extends Component<Props> {
                 })
               }
               WeChat.openWXApp()
+            }else{
+              for(let i in v.item.imgs){
+                const fromUrl = `http://img.zcool.cn/community/${v.item.imgs[i]}`
+                var promise = CameraRoll.saveToCameraRoll(fromUrl);
+                promise.then(function(result) {
+                  console.log("图片已保存至相册")
+                }).catch(function(error) {
+                  Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                  console.log("保存失败",error)
+                })
+              }
+              WeChat.openWXApp()
             }
           }},
           { text: '朋友圈(链接)', onPress: () => {
