@@ -10,6 +10,7 @@
     "antd-mobile-rn": "^2.3.1",
     "react": "16.6.1",
     "react-native": "0.57.5",
+    "react-native-fs": "^2.12.1",
     "react-native-image-zoom-viewer": "^2.2.23",
     "react-native-wechat": "^1.9.10",
     "react-navigation": "^2.18.2",

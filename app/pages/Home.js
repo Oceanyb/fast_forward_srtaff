@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback, AsyncStorage, Platform } from 'react-native'
-import { TabBar, Button, Card, Toast, Stepper, ActionSheet } from 'antd-mobile-rn'
+import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback, AsyncStorage, CameraRoll, Platform, PermissionsAndroid, Alert } from 'react-native'
+import { TabBar, Button, Card, Toast, Stepper, Modal } from 'antd-mobile-rn'
 import * as WeChat from 'react-native-wechat'
+import RNFS from 'react-native-fs'
 
 import { XyNavBar } from '../static/libs/MiniXy'
 import _api from '../static/libs/apiRequest'
@@ -73,7 +74,7 @@ export default class Home extends Component<Props> {
     if(_goodData.length>=0){
       return (
         <View style={{ height:"100%"}}>
-          <XyNavBar bgc="#1E78F0" title="主页" style={{ position: 'absolute', width: '100%', zIndex: 999 }} right="分享店铺" onRightPress={this.showShareActionSheet}></XyNavBar>
+          <XyNavBar bgc="#1E78F0" title="主页" style={{ position: 'absolute', width: '100%', zIndex: 999 }} right="分享店铺" onRightPress={this.shareShop}></XyNavBar>
           <View style={{marginTop:$xy.statusBarH + $xy.navH,marginBottom:5}}>
             <FlatList
               data={this.state.testData}
@@ -110,7 +111,7 @@ export default class Home extends Component<Props> {
                 </View>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
                   <Text style={{color:'red',fontSize:24 }}>￥{item.item.price_sale}</Text>
-                  <Button type='primary' style={{height:34,width:82}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={() => this.shareTest(item)}>分 享</Button>
+                  <Button type='primary' style={{height:34,width:82}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={() => this.shareGood(item)}>分 享</Button>
                 </View>
               </View>
             </View>
@@ -122,6 +123,16 @@ export default class Home extends Component<Props> {
   componentDidMount = async () => {
     console.log('props',this.props)
     this.getData()
+    try {
+      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE)
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("You can use the camera")
+      } else {
+        console.log("Camera permission denied")
+      }
+    } catch (err) {
+      console.warn(err)
+    }
   }
   refreshing = () => {
     this.props.navigation.replace('Home')
@@ -156,51 +167,90 @@ export default class Home extends Component<Props> {
     //   })
     // }
   }
-  showShareActionSheet = () => {
-    const opts: any = {
-      message: 'Message to go with the shared url',
-      title: 'Share Actionsheet',
-    };
-    console.log('sadasd',opts)
-
-    if (Platform.OS === 'ios') {
-      opts.url = 'https://www.alipay.com/';
-      opts.tintColor = '#ff0000';
-      opts.excludedActivityTypes = ['com.apple.UIKit.activity.PostToTwitter'];
-    }
-
-    ActionSheet.showShareActionSheetWithOptions(
-      opts,
-      (error: any) => alert(error),
-      (success: any, method: any) => {
-        let text;
-        if (success) {
-          text = `Shared with ${method}`;
-        } else {
-          text = 'Did not share';
-        }
-        this.setState({ text });
-      },
-    );
+  shareShop = () => {
+    WeChat.isWXAppInstalled()
+    .then((isInstalled) => {
+      if (isInstalled) {
+        console.log('installed');
+        Modal.operation([
+          { text: '微信好友', onPress: () => {
+            WeChat.shareToSession({
+            title:'微信好友测试链接',
+            description: '分享自:江清清的技术专栏(www.lcode.org)',
+            thumbImage: 'http://img.zcool.cn/community/01639e559dec1232f875370ae2497f.jpg',
+            type: 'news',
+            webpageUrl: 'http://www.lcode.org'
+          })
+          .catch((error) => {console.log("error")})}},
+          { text: '朋友圈', onPress: () => {
+            WeChat.shareToTimeline({
+            title:'微信朋友圈测试链接',
+            description: '分享自:江清清的技术专栏(www.lcode.org)',
+            thumbImage: 'http://img.zcool.cn/community/01639e559dec1232f875370ae2497f.jpg',
+            type: 'news',
+            webpageUrl: 'http://www.lcode.org'
+          })
+          .catch((error) => {console.log("error")})}},
+        ]);
+      } else {
+        console.log('fail')
+      }
+    })
   }
-  shareTest = (v) => {
+  shareGood = (v) => {
     console.log('item',v)
     console.log('wechat',WeChat);
     WeChat.isWXAppInstalled()
     .then((isInstalled) => {
       if (isInstalled) {
-        //发送授权请求
-        console.log('success');
-        WeChat.shareToSession({
-          title:'微信朋友圈测试链接',
-          description: '分享自:江清清的技术专栏(www.lcode.org)',
-          thumbImage: `http://img.zcool.cn/community/${v.item.imgs[0]}`,
-          type: 'news',
-          webpageUrl: 'http://www.lcode.org'
-        })
-        .catch((error) => {console.log("error")});
+        console.log('Installed');
+        Modal.operation([
+          { text: '朋友圈(多图)', onPress: async () => {
+            if(Platform.OS === 'android'){
+              const storeLocation = `${RNFS.ExternalDirectoryPath}`;
+              for(let i in v.item.imgs){
+                let pathName = new Date().getTime() + ".png"
+                let downloadDest = `${storeLocation}/${pathName}`;
+                const ret = RNFS.downloadFile({
+                  fromUrl:`http://img.zcool.cn/community/${v.item.imgs[i]}`,
+                  toFile:downloadDest
+                });
+                ret.promise.then(res => {
+                  if(res && res.statusCode === 200){
+                    var promise = CameraRoll.saveToCameraRoll("file://" + downloadDest);
+                    promise.then(function(result) {
+                      console.log("图片已保存至相册")
+                    }).catch(function(error) {
+                      Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                      console.log("保存失败",error)
+                    })
+                  }
+                })
+              }
+              WeChat.openWXApp()
+            }
+          }},
+          { text: '朋友圈(链接)', onPress: () => {
+            WeChat.shareToTimeline({
+            title:'微信朋友圈测试链接',
+            description: '分享自:江清清的技术专栏(www.lcode.org)',
+            thumbImage: `http://img.zcool.cn/community/${v.item.imgs[0]}`,
+            type: 'news',
+            webpageUrl: 'http://www.lcode.org'
+          })
+          .catch((error) => {console.log("error")})}},
+          { text: '微信好友', onPress: () => {
+            WeChat.shareToSession({
+            title:'微信好友测试链接',
+            description: '分享自:江清清的技术专栏(www.lcode.org)',
+            thumbImage: `http://img.zcool.cn/community/${v.item.imgs[0]}`,
+            type: 'news',
+            webpageUrl: 'http://www.lcode.org'
+          })
+          .catch((error) => {console.log("error")})}},
+        ]);
       } else {
-        console.log('fail')
+        Alert.alert('失败','请先安装微信后再进行分享!')
       }
     })
   }
