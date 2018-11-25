@@ -106,7 +106,7 @@ export default class Home extends Component<Props> {
               />
               <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',width:"50%"}}>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-start',height:88,marginRight:8}}>
-                  <Text style={{fontSize:18,color:'gray'}}>利润:{item.item.price_sale-item.item.price_agent}</Text>
+                  <Text style={{fontSize:18,color:'gray'}}>利润:{item.item.price_agent-item.item.price_sale}</Text>
                   <Text style={{fontSize:18,color:'gray'}}>库存:{item.item.stock}</Text>
                 </View>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
@@ -123,15 +123,17 @@ export default class Home extends Component<Props> {
   componentDidMount = async () => {
     console.log('props',this.props)
     this.getData()
-    try {
-      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE)
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use the camera")
-      } else {
-        console.log("Camera permission denied")
+    if(Platform.OS === 'android'){
+      try {
+        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE)
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log("You can use the camera")
+        } else {
+          console.log("Camera permission denied")
+        }
+      } catch (err) {
+        console.warn(err)
       }
-    } catch (err) {
-      console.warn(err)
     }
   }
   refreshing = () => {
