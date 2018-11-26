@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback, AsyncStorage, CameraRoll, Platform, PermissionsAndroid, Alert } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback, AsyncStorage, CameraRoll, Platform, PermissionsAndroid, Alert, Clipboard } from 'react-native'
 import { TabBar, Button, Card, Toast, Stepper, Modal } from 'antd-mobile-rn'
 import * as WeChat from 'react-native-wechat'
 import RNFS from 'react-native-fs'
@@ -225,24 +225,28 @@ export default class Home extends Component<Props> {
                     promise.then(function(result) {
                       console.log("图片已保存至相册")
                     }).catch(function(error) {
-                      Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                      // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
                       console.log("保存失败",error)
                     })
                   }
                 })
               }
+              Clipboard.setString(v.item.name)
               WeChat.openWXApp()
             }else{
+              console.log('platfrom',Platform.OS)
               for(let i in v.item.imgs.split(',')){
+                console.log('1234',v.item.imgs.split(',')[i])
                 const fromUrl = `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[i]}`
                 var promise = CameraRoll.saveToCameraRoll(fromUrl);
                 promise.then(function(result) {
                   console.log("图片已保存至相册")
                 }).catch(function(error) {
-                  Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                  // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
                   console.log("保存失败",error)
                 })
               }
+              Clipboard.setString(v.item.name)
               WeChat.openWXApp()
             }
           }},

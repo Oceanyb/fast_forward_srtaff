@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, AsyncStorage } from 'react-native';
 import { Button, List, InputItem, Toast } from 'antd-mobile-rn';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import Dimensions from 'Dimensions';
 
 import LocalImg from '../images';
 import { XyNavBar } from '../static/libs/MiniXy'
@@ -28,25 +30,35 @@ export default class Login extends Component<Props> {
     return (
       <View style={{height:"100%",backgroundColor:"#fff"}}>
         <XyNavBar bgc="#1E78F0" title="登录" style={{ position: 'absolute', width: '100%', zIndex: 999 }}></XyNavBar>
-        <View style={{marginTop:$xy.statusBarH + $xy.navH,display:"flex",alignItems:"center"}}>
-          <Image style={{height:240,width:375}} source={LocalImg['suichu_t']}/>
-          <Text style={{fontSize:24,marginBottom:22,color:'#1E78F0'}}>销 售 登 录</Text>
-          <List style={{width:'72%',marginTop:10}}>
-            <InputItem
-              clear
-              type="number"
-              placeholder="手机号"
-              onChange={(v) => {
-                this.setState({
-                  phone: v,
-                });
-              }}
-            >
-              <Text>手机号:</Text>
-            </InputItem>
-          </List>
-          <Button type="primary" activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} inline style={{width:'60%',marginTop:30}} onPressOut={()=>{this.login()} }>登  录</Button>
-        </View>
+        <KeyboardAwareScrollView
+          onKeyboardWillShow={(frames) => {
+            console.log('Keyboard event', frames)
+          }}
+          onKeyboardWillHide={(frames) => {
+            console.log('Keyboard event', frames)
+          }}
+          style={{ height: Dimensions.get('window').height - $xy.statusBarH - $xy.navH - 44 - $xy.homeBarH }}
+        >
+          <View style={{marginTop:$xy.statusBarH + $xy.navH,display:"flex",alignItems:"center"}}>
+            <Image style={{height:240,width:375}} source={LocalImg['suichu_t']}/>
+            <Text style={{fontSize:24,marginBottom:22,color:'#1E78F0'}}>销 售 登 录</Text>
+            <List style={{width:'72%',marginTop:10}}>
+              <InputItem
+                clear
+                type="number"
+                placeholder="手机号"
+                onChange={(v) => {
+                  this.setState({
+                    phone: v,
+                  });
+                }}
+              >
+                <Text>手机号:</Text>
+              </InputItem>
+            </List>
+            <Button type="primary" activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} inline style={{width:'60%',marginTop:30}} onPressOut={()=>{this.login()} }>登  录</Button>
+          </View>
+        </KeyboardAwareScrollView>
       </View>
     );
   }
