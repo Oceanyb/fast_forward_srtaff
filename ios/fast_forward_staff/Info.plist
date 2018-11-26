@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>fast_forward_staff</string>
+	<string>随出库存</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -57,9 +57,9 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App需要访问你的相册</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App需要访问你的相册</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App需要访问你的相册</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

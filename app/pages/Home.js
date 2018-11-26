@@ -107,7 +107,7 @@ export default class Home extends Component<Props> {
               />
               <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',width:"50%"}}>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-start',height:88,marginRight:8}}>
-                  <Text style={{fontSize:18,color:'gray'}}>利润:{item.item.price_agent-item.item.price_sale}</Text>
+                  <Text style={{fontSize:18,color:'gray'}}>利润:{item.item.price_sale-item.item.price_agent}</Text>
                   <Text style={{fontSize:18,color:'gray'}}>库存:{item.item.stock}</Text>
                 </View>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
