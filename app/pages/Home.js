@@ -22,56 +22,14 @@ export default class Home extends Component<Props> {
       ...props,
       detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
       goodData:[],
-      user:{},
-      testData:[
-        {
-          id:'12108',
-          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          price_sale:'1958',
-          price_agent:'1388',
-          stock:'8',
-          imgs:['01639e559dec1232f875370ae2497f.jpg','018f19559deb796ac7257aea2d2084.jpg','0170c6559deb7d6ac7257aea5a1a93.jpg']
-        },
-        {
-          id:'12108',
-          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          price_sale:'1458',
-          price_agent:'1388',
-          stock:'8',
-          imgs:['0170c6559deb7d6ac7257aea5a1a93.jpg','01639e559dec1232f875370ae2497f.jpg','018f19559deb796ac7257aea2d2084.jpg']
-        },
-        {
-          id:'12108',
-          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          price_sale:'1058',
-          price_agent:'998',
-          stock:'8',
-          imgs:['018f19559deb796ac7257aea2d2084.jpg','0170c6559deb7d6ac7257aea5a1a93.jpg','01639e559dec1232f875370ae2497f.jpg']
-        },
-        {
-          id:'12109',
-          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          price_sale:'1698',
-          price_agent:'1388',
-          stock:'2',
-          imgs:['0170c6559deb7d6ac7257aea5a1a93.jpg','018f19559deb796ac7257aea2d2084.jpg','01639e559dec1232f875370ae2497f.jpg']
-        },
-        {
-          id:'12110',
-          name:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
-          price_sale:'1588',
-          price_agent:'1388',
-          stock:'8',
-          imgs:['0170c6559deb7d6ac7257aea5a1a93.jpg','01639e559dec1232f875370ae2497f.jpg','018f19559deb796ac7257aea2d2084.jpg']
-        }
-      ]
+      user:{}
     }
   }
 
   render() {
     console.log(this.state.goodData)
     const _goodData=this.state.goodData
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
     if(this.state.user.shop_id){
       return (
         <View style={{ height:"100%"}}>
@@ -87,7 +45,7 @@ export default class Home extends Component<Props> {
             />
           </View>
         </View>
-      );
+      )
     }else{
       return(<View></View>)
     }
@@ -179,20 +137,20 @@ export default class Home extends Component<Props> {
         Modal.operation([
           { text: '微信好友', onPress: () => {
             WeChat.shareToSession({
-            title:'微信好友测试链接',
-            description: '分享自:江清清的技术专栏(www.lcode.org)',
-            thumbImage: 'http://img.zcool.cn/community/01639e559dec1232f875370ae2497f.jpg',
+            title:'二手手机',
+            description: '二手手机',
+            thumbImage: `http://aisuichu.com:7001/public/upload/${this.state.goodData[0].imgs.split(',')[0]}`,
             type: 'news',
-            webpageUrl: 'http://www.lcode.org'
+            webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
           })
           .catch((error) => {console.log("error")})}},
           { text: '朋友圈', onPress: () => {
             WeChat.shareToTimeline({
-            title:'微信朋友圈测试链接',
-            description: '分享自:江清清的技术专栏(www.lcode.org)',
-            thumbImage: 'http://img.zcool.cn/community/01639e559dec1232f875370ae2497f.jpg',
+            title:'二手手机',
+            description: '二手手机',
+            thumbImage: `http://aisuichu.com:7001/public/upload/${this.state.goodData[0].imgs.split(',')[0]}`,
             type: 'news',
-            webpageUrl: 'http://www.lcode.org'
+            webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
           })
           .catch((error) => {console.log("error")})}},
         ]);
@@ -250,24 +208,24 @@ export default class Home extends Component<Props> {
               WeChat.openWXApp()
             }
           }},
-          { text: '朋友圈(链接)', onPress: () => {
-            WeChat.shareToTimeline({
-            title:'微信朋友圈测试链接',
-            description: '分享自:江清清的技术专栏(www.lcode.org)',
-            thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
-            type: 'news',
-            webpageUrl: 'http://www.lcode.org'
-          })
-          .catch((error) => {console.log("error")})}},
-          { text: '微信好友', onPress: () => {
-            WeChat.shareToSession({
-            title:'微信好友测试链接',
-            description: '分享自:江清清的技术专栏(www.lcode.org)',
-            thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
-            type: 'news',
-            webpageUrl: 'http://www.lcode.org'
-          })
-          .catch((error) => {console.log("error")})}},
+          // { text: '朋友圈(链接)', onPress: () => {
+          //   WeChat.shareToTimeline({
+          //   title:'微信朋友圈测试链接',
+          //   description: '分享自:江清清的技术专栏(www.lcode.org)',
+          //   thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
+          //   type: 'news',
+          //   webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
+          // })
+          // .catch((error) => {console.log("error")})}},
+          // { text: '微信好友', onPress: () => {
+          //   WeChat.shareToSession({
+          //   title:'微信好友测试链接',
+          //   description: '分享自:江清清的技术专栏(www.lcode.org)',
+          //   thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
+          //   type: 'news',
+          //   webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
+          // })
+          // .catch((error) => {console.log("error")})}},
         ]);
       } else {
         Alert.alert('失败','请先安装微信后再进行分享!')
