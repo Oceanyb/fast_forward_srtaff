@@ -33,7 +33,7 @@ export default class Home extends Component<Props> {
     if(this.state.user.shop_id){
       return (
         <View style={{ height:"100%"}}>
-          <XyNavBar bgc="#1E78F0" title="主页" style={{ position: 'absolute', width: '100%', zIndex: 999 }} right="分享店铺" onRightPress={this.shareShop}></XyNavBar>
+          <XyNavBar bgc="#44A754" title="主页" left="退出" onLeftPress={()=> this.logOut()} style={{ position: 'absolute', width: '100%', zIndex: 999 }} right="分享店铺" onRightPress={this.shareShop}></XyNavBar>
           <View style={{marginTop:$xy.statusBarH + $xy.navH,marginBottom:5}}>
             <FlatList
               data={_goodData}
@@ -70,7 +70,7 @@ export default class Home extends Component<Props> {
                 </View>
                 <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
                   <Text style={{color:'red',fontSize:24 }}>￥{item.item.price_sale}</Text>
-                  <Button type='primary' style={{height:34,width:82}} activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} onPressOut={() => this.shareGood(item)}>分 享</Button>
+                  <Button type='primary' style={{height:34,width:82,borderColor:'#44A754',backgroundColor:'#44A754'}} activeStyle={{backgroundColor:"#44A754",opacity:0.95}} onPressOut={() => this.shareGood(item)}>分 享</Button>
                 </View>
               </View>
             </View>
@@ -95,12 +95,25 @@ export default class Home extends Component<Props> {
       }
     }
   }
+  logOut = () => {
+    const _this = this
+    Modal.alert('确认退出？', '', [
+      { text: '取消', onPress: () => {} },
+      { text: '确认', onPress: async () => {
+          await AsyncStorage.removeItem('user', function (error) {
+            if (error) {
+              console.log('删除失败')
+            }else {
+              console.log('删除完成')
+              _this.state.navigation.replace('Home')    
+            }
+          })
+        }
+      },
+    ]);
+  }
   refreshing = () => {
     this.props.navigation.replace('Home')
-    let timer =  setTimeout(()=>{
-      clearTimeout(timer)
-        Toast.info('刷新成功!',1)
-      },1000)
   }
   onChanged=(value)=>{
     console.log('changed', value)
@@ -111,7 +124,7 @@ export default class Home extends Component<Props> {
     try {
       user = JSON.parse(await AsyncStorage.getItem('user'))
       if (!user) {
-        this.state.navigation.navigate('Login')
+        this.state.navigation.replace('Login')
         return
       }
     } catch (e) {
@@ -137,8 +150,8 @@ export default class Home extends Component<Props> {
         Modal.operation([
           { text: '微信好友', onPress: () => {
             WeChat.shareToSession({
-            title:'二手手机',
-            description: '二手手机',
+            title:'今日库存',
+            description: '点击查看今日最新库存',
             thumbImage: `http://aisuichu.com:7001/public/upload/${this.state.goodData[0].imgs.split(',')[0]}`,
             type: 'news',
             webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
@@ -146,8 +159,8 @@ export default class Home extends Component<Props> {
           .catch((error) => {console.log("error")})}},
           { text: '朋友圈', onPress: () => {
             WeChat.shareToTimeline({
-            title:'二手手机',
-            description: '二手手机',
+            title:'今日库存',
+            description: '点击查看今日最新库存',
             thumbImage: `http://aisuichu.com:7001/public/upload/${this.state.goodData[0].imgs.split(',')[0]}`,
             type: 'news',
             webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
@@ -169,6 +182,7 @@ export default class Home extends Component<Props> {
         Modal.operation([
           { text: '朋友圈(多图)', onPress: async () => {
             if(Platform.OS === 'android'){
+              var alength = 1
               const storeLocation = `${RNFS.ExternalDirectoryPath}`;
               for(let i in v.item.imgs.split(',')){
                 let pathName = new Date().getTime() + ".png"
@@ -182,16 +196,29 @@ export default class Home extends Component<Props> {
                     var promise = CameraRoll.saveToCameraRoll("file://" + downloadDest);
                     promise.then(function(result) {
                       console.log("图片已保存至相册")
+                      alength = alengt + 1
+                      if(v.item.imgs.split(',').length == alength){
+                        Clipboard.setString(v.item.name)
+                        WeChat.openWXApp()
+                      }
                     }).catch(function(error) {
                       // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
                       console.log("保存失败",error)
                     })
                   }
                 })
+                let a= parseInt(i)+1
+                console.log("i=",a)
+                console.log("length",v.item.imgs.split(',').length)
+                if(v.item.imgs.split(',').length == a){
+                  Clipboard.setString(v.item.name)
+                  WeChat.openWXApp()
+                }
               }
               Clipboard.setString(v.item.name)
               WeChat.openWXApp()
             }else{
+              var ilength = 1
               console.log('platfrom',Platform.OS)
               for(let i in v.item.imgs.split(',')){
                 console.log('1234',v.item.imgs.split(',')[i])
@@ -199,33 +226,35 @@ export default class Home extends Component<Props> {
                 var promise = CameraRoll.saveToCameraRoll(fromUrl);
                 promise.then(function(result) {
                   console.log("图片已保存至相册")
+                  ilength = ilength + 1
+                  if(v.item.imgs.split(',').length == ilength){
+                    Clipboard.setString(v.item.name)
+                    WeChat.openWXApp()
+                  }
                 }).catch(function(error) {
                   // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
                   console.log("保存失败",error)
                 })
               }
-              Clipboard.setString(v.item.name)
-              WeChat.openWXApp()
             }
           }},
-          // { text: '朋友圈(链接)', onPress: () => {
-          //   WeChat.shareToTimeline({
-          //   title:'微信朋友圈测试链接',
-          //   description: '分享自:江清清的技术专栏(www.lcode.org)',
-          //   thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
-          //   type: 'news',
-          //   webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
-          // })
-          // .catch((error) => {console.log("error")})}},
-          // { text: '微信好友', onPress: () => {
-          //   WeChat.shareToSession({
-          //   title:'微信好友测试链接',
-          //   description: '分享自:江清清的技术专栏(www.lcode.org)',
-          //   thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
-          //   type: 'news',
-          //   webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
-          // })
-          // .catch((error) => {console.log("error")})}},
+          { text: '朋友圈(链接)', onPress: () => {
+            WeChat.shareToTimeline({
+            title:v.item.name,
+            thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
+            type: 'news',
+            webpageUrl: `http://aisuichu.com:8083/#/GoodDetail?shopId=${this.state.user.shop_id}&goodId=${v.item.id}`
+          })
+          .catch((error) => {console.log("error")})}},
+          { text: '微信好友', onPress: () => {
+            WeChat.shareToSession({
+            title:v.item.name,
+            description: '------------' + '\n' + '售价：' + v.item.price_sale + '\n' + '点击查看更多详情',
+            thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
+            type: 'news',
+            webpageUrl: `http://aisuichu.com:8083/#/GoodDetail?shopId=${this.state.user.shop_id}&goodId=${v.item.id}`
+          })
+          .catch((error) => {console.log("error")})}},
         ]);
       } else {
         Alert.alert('失败','请先安装微信后再进行分享!')

@@ -42,6 +42,7 @@
 		42A9A98E21A590FC00C12500 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A98D21A590FC00C12500 /* CoreTelephony.framework */; };
 		42A9A99021A5910F00C12500 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A98F21A5910F00C12500 /* SystemConfiguration.framework */; };
 		42A9A9E421A95C1500C12500 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A9E321A95BD800C12500 /* libRCTCameraRoll.a */; };
+		42CE998221AF9CB700ED8B75 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 42CE995621AF9CB700ED8B75 /* bundle */; };
 		5B3123A9F53244859DD58F6F /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C7D1F5EE84BAFA1BB30FE /* libRNFS.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		90E115CA805449AA9645FB24 /* RCTWeChatTests.xctest in Frameworks */ = {isa = PBXBuildFile; fileRef = 967CF54CA0F24D5A95953927 /* RCTWeChatTests.xctest */; };
@@ -397,6 +398,7 @@
 		42A9A98D21A590FC00C12500 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		42A9A98F21A5910F00C12500 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		42A9A9DE21A95BD800C12500 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		42CE995621AF9CB700ED8B75 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		42EF8BBD21AAB641000D6BB9 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 		13B07FAE1A68108700A75B9A /* fast_forward_staff */ = {
 			isa = PBXGroup;
 			children = (
+				42CE995621AF9CB700ED8B75 /* bundle */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -815,7 +818,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = J4Q6BR9A2M;
+						DevelopmentTeam = 783B5LZJ54;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -1237,6 +1240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				42CE998221AF9CB700ED8B75 /* bundle in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1356,7 +1360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = J4Q6BR9A2M;
+				DEVELOPMENT_TEAM = 783B5LZJ54;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1390,7 +1394,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = J4Q6BR9A2M;
+				DEVELOPMENT_TEAM = 783B5LZJ54;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-wechatios",

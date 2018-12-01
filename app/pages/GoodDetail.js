@@ -29,7 +29,7 @@ export default class GoodDetail extends Component<Props> {
   render() {
     return(
       <View>
-        <XyNavBar bgc="#1E78F0" title="商品详情" left='back' nav={this.props.navigation} right="分享" onRightPress={()=>this.state.navigation.navigate('StaffList')}></XyNavBar>
+        <XyNavBar bgc="#44A754" title="商品详情" left='back' nav={this.props.navigation}></XyNavBar>
         <ScrollView style={{marginBottom:50}}>
           <Card full>
             <Card.Header

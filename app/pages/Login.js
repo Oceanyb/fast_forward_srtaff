@@ -22,14 +22,15 @@ export default class Login extends Component<Props> {
     this.state = {
       ...props,
       phone: '',
-      password: ''
+      password: '',
+      shop:''
     }
     console.log(props)
   }
   render() {
     return (
       <View style={{height:"100%",backgroundColor:"#fff"}}>
-        <XyNavBar bgc="#1E78F0" title="登录" style={{ position: 'absolute', width: '100%', zIndex: 999 }}></XyNavBar>
+        <XyNavBar bgc="#44A754" title="登录" style={{ position: 'absolute', width: '100%', zIndex: 999 }}></XyNavBar>
         <KeyboardAwareScrollView
           onKeyboardWillShow={(frames) => {
             console.log('Keyboard event', frames)
@@ -41,12 +42,12 @@ export default class Login extends Component<Props> {
         >
           <View style={{marginTop:$xy.statusBarH + $xy.navH,display:"flex",alignItems:"center"}}>
             <Image style={{height:240,width:375}} source={LocalImg['suichu_t']}/>
-            <Text style={{fontSize:24,marginBottom:22,color:'#1E78F0'}}>销 售 登 录</Text>
+            <Text style={{fontSize:24,marginBottom:22,color:'#44A754'}}>销 售 登 录</Text>
             <List style={{width:'72%',marginTop:10}}>
               <InputItem
                 clear
                 type="number"
-                placeholder="手机号"
+                placeholder="员工手机号"
                 onChange={(v) => {
                   this.setState({
                     phone: v,
@@ -55,8 +56,20 @@ export default class Login extends Component<Props> {
               >
                 <Text>手机号:</Text>
               </InputItem>
+              <InputItem
+                clear
+                type="number"
+                placeholder="店铺手机号"
+                onChange={(v) => {
+                  this.setState({
+                    shop: v,
+                  });
+                }}
+              >
+                <Text>店铺号:</Text>
+              </InputItem>
             </List>
-            <Button type="primary" activeStyle={{backgroundColor:"#1E78F0",opacity:0.95}} inline style={{width:'60%',marginTop:30}} onPressOut={()=>{this.login()} }>登  录</Button>
+            <Button type="primary" activeStyle={{backgroundColor:"#44A754",opacity:0.95}} inline style={{width:'60%',marginTop:30,backgroundColor:'#44A754',borderColor:'#44A754'}} onPressOut={()=>{this.login()} }>登  录</Button>
           </View>
         </KeyboardAwareScrollView>
       </View>
@@ -65,12 +78,17 @@ export default class Login extends Component<Props> {
   login = async () => {
     console.log('api',_api)
     if (!this.state.phone) {
-      Toast.fail('请输入手机号', 1);
+      Toast.fail('请输入手机号', 0.5);
+      return
+    }
+    if (!this.state.shop) {
+      Toast.fail('请输入店铺号', 0.5);
       return
     }
     const res = await _api.post('/login', {
       provider: 'local',
       role: 'staff',
+      shop_id: this.state.shop,
       username: this.state.phone,
       password: '000000'
     })
