@@ -207,38 +207,156 @@ export default class Home extends Component<Props> {
                     })
                   }
                 })
-                let a= parseInt(i)+1
-                console.log("i=",a)
-                console.log("length",v.item.imgs.split(',').length)
-                if(v.item.imgs.split(',').length == a){
-                  Clipboard.setString(v.item.name)
-                  WeChat.openWXApp()
-                }
               }
-              Clipboard.setString(v.item.name)
-              WeChat.openWXApp()
             }else{
-              var ilength = 1
+              console.log('LibraryDirectoryPath=' + RNFS.LibraryDirectoryPath)
+              var ilength = 0
+              const storeLocation = `${RNFS.LibraryDirectoryPath}`;
               console.log('platfrom',Platform.OS)
-              for(let i in v.item.imgs.split(',')){
-                console.log('1234',v.item.imgs.split(',')[i])
-                const fromUrl = `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[i]}`
-                var promise = CameraRoll.saveToCameraRoll(fromUrl);
-                promise.then(function(result) {
+              // for(let i in v.item.imgs.split(',')){
+                // console.log('1234',v.item.imgs.split(',')[i])
+                // let pathName = new Date().getTime() + ".png"
+                // let downloadDest = `${storeLocation}/${pathName}`;
+                // const ret = RNFS.downloadFile({
+                //   fromUrl:`http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[i]}`,
+                //   toFile:downloadDest
+                // });
+                // console.log("download",ret)
+                // ret.promise.then(res => {
+                //   if(res && res.statusCode === 200){
+                //     var promise = CameraRoll.saveToCameraRoll(downloadDest);
+                //     promise.then(function(result) {
+                //       console.log("图片已保存至相册")
+                //       ilength = ilength + 1
+                //       if(v.item.imgs.split(',').length == ilength){
+                //         Clipboard.setString(v.item.name)
+                //         WeChat.openWXApp()
+                //       }
+                //     }).catch(function(error) {
+                //       // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                //       console.log("保存失败",error)
+                //     })
+                //   }
+                // }
+                Toast.loading('原图下载中...', 3, () => {
+                  console.log('Load complete !!!');
+                });
+                const fromUrl = []
+                for(let i in v.item.imgs.split(',')){
+                  fromUrl.push(`http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[i]}`)
+                }
+                CameraRoll.saveToCameraRoll(fromUrl[0]).then(function(result) {
                   console.log("图片已保存至相册")
                   ilength = ilength + 1
                   if(v.item.imgs.split(',').length == ilength){
                     Clipboard.setString(v.item.name)
                     WeChat.openWXApp()
+                    return
                   }
+                  CameraRoll.saveToCameraRoll(fromUrl[1]).then(function(result) {
+                    console.log("图片已保存至相册")
+                    ilength = ilength + 1
+                    if(v.item.imgs.split(',').length == ilength){
+                      Clipboard.setString(v.item.name)
+                      WeChat.openWXApp()
+                      return
+                    }
+                    CameraRoll.saveToCameraRoll(fromUrl[2]).then(function(result) {
+                      console.log("图片已保存至相册")
+                      ilength = ilength + 1
+                      if(v.item.imgs.split(',').length == ilength){
+                        Clipboard.setString(v.item.name)
+                        WeChat.openWXApp()
+                        return
+                      }
+                      CameraRoll.saveToCameraRoll(fromUrl[3]).then(function(result) {
+                        console.log("图片已保存至相册")
+                        ilength = ilength + 1
+                        if(v.item.imgs.split(',').length == ilength){
+                          Clipboard.setString(v.item.name)
+                          WeChat.openWXApp()
+                          return
+                        }
+                        CameraRoll.saveToCameraRoll(fromUrl[4]).then(function(result) {
+                          console.log("图片已保存至相册")
+                          ilength = ilength + 1
+                          if(v.item.imgs.split(',').length == ilength){
+                            Clipboard.setString(v.item.name)
+                            WeChat.openWXApp()
+                            return
+                          }
+                          CameraRoll.saveToCameraRoll(fromUrl[5]).then(function(result) {
+                            console.log("图片已保存至相册")
+                            ilength = ilength + 1
+                            if(v.item.imgs.split(',').length == ilength){
+                              Clipboard.setString(v.item.name)
+                              WeChat.openWXApp()
+                              return
+                            }CameraRoll.saveToCameraRoll(fromUrl[6]).then(function(result) {
+                              console.log("图片已保存至相册")
+                              ilength = ilength + 1
+                              if(v.item.imgs.split(',').length == ilength){
+                                Clipboard.setString(v.item.name)
+                                WeChat.openWXApp()
+                                return
+                              }
+                              CameraRoll.saveToCameraRoll(fromUrl[7]).then(function(result) {
+                                console.log("图片已保存至相册")
+                                ilength = ilength + 1
+                                if(v.item.imgs.split(',').length == ilength){
+                                  Clipboard.setString(v.item.name)
+                                  WeChat.openWXApp()
+                                  return
+                                }
+                                CameraRoll.saveToCameraRoll(fromUrl[8]).then(function(result) {
+                                  console.log("图片已保存至相册")
+                                  ilength = ilength + 1
+                                  if(v.item.imgs.split(',').length == ilength){
+                                    Clipboard.setString(v.item.name)
+                                    WeChat.openWXApp()
+                                    return
+                                  }
+                                }).catch(function(error) {
+                                  // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                                  console.log("保存失败",error)
+                                })
+                              }).catch(function(error) {
+                                // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                                console.log("保存失败",error)
+                              })
+                            }).catch(function(error) {
+                              // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                              console.log("保存失败",error)
+                            })
+                          }).catch(function(error) {
+                            // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                            console.log("保存失败",error)
+                          })
+                        }).catch(function(error) {
+                          // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                          console.log("保存失败",error)
+                        })
+                      }).catch(function(error) {
+                        // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                        console.log("保存失败",error)
+                      })
+                    }).catch(function(error) {
+                      // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                      console.log("保存失败",error)
+                    })
+                  }).catch(function(error) {
+                    // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+                    console.log("保存失败",error)
+                  })
                 }).catch(function(error) {
                   // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
                   console.log("保存失败",error)
                 })
-              }
+              // }
             }
           }},
           { text: '朋友圈(链接)', onPress: () => {
+            Clipboard.setString(v.item.name)
             WeChat.shareToTimeline({
             title:v.item.name,
             thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
@@ -247,6 +365,7 @@ export default class Home extends Component<Props> {
           })
           .catch((error) => {console.log("error")})}},
           { text: '微信好友', onPress: () => {
+            Clipboard.setString(v.item.name)
             WeChat.shareToSession({
             title:v.item.name,
             description: '------------' + '\n' + '售价：' + v.item.price_sale + '\n' + '点击查看更多详情',
