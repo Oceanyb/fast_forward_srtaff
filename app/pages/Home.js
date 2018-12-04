@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback, AsyncStorage, CameraRoll, Platform, PermissionsAndroid, Alert, Clipboard } from 'react-native'
-import { TabBar, Button, Card, Toast, Stepper, Modal } from 'antd-mobile-rn'
+import { TabBar, Button, Card, Toast, Stepper, Modal, Progress } from 'antd-mobile-rn'
 import * as WeChat from 'react-native-wechat'
 import RNFS from 'react-native-fs'
 
@@ -22,7 +22,11 @@ export default class Home extends Component<Props> {
       ...props,
       detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
       goodData:[],
-      user:{}
+      user:{},
+      modal1:false,
+      percent:0,
+      allImg:'',
+      downloaded:0
     }
   }
 
@@ -44,6 +48,17 @@ export default class Home extends Component<Props> {
               extraData={this.state}
             />
           </View>
+          <Modal
+            visible={this.state.modal1}
+            transparent
+            maskClosable={false}
+            title="原图下载中......"
+          >
+            <View style={{marginTop:20,marginBottom:8,position:'relative',alignItems:'flex-end'}}>
+              <Text style={{fontSize:16}}>{this.state.downloaded}/{this.state.allImg}</Text>
+            </View>
+            <Progress style={{marginBottom:8}} percent={this.state.percent} />
+          </Modal>
         </View>
       )
     }else{
@@ -173,6 +188,8 @@ export default class Home extends Component<Props> {
     })
   }
   shareGood = (v) => {
+    const _this = this
+    _this.setState({percent:0,downloaded:0})
     console.log('item',v)
     console.log('wechat',WeChat);
     WeChat.isWXAppInstalled()
@@ -182,32 +199,232 @@ export default class Home extends Component<Props> {
         Modal.operation([
           { text: '朋友圈(多图)', onPress: async () => {
             if(Platform.OS === 'android'){
-              var alength = 1
+              this.setState({
+                allImg: v.item.imgs.split(',').length,
+                modal1:true
+              })
+              var alength = 0
+              const downloadImgs = []
               const storeLocation = `${RNFS.ExternalDirectoryPath}`;
               for(let i in v.item.imgs.split(',')){
-                let pathName = new Date().getTime() + ".png"
-                let downloadDest = `${storeLocation}/${pathName}`;
-                const ret = RNFS.downloadFile({
-                  fromUrl:`http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[i]}`,
-                  toFile:downloadDest
-                });
-                ret.promise.then(res => {
-                  if(res && res.statusCode === 200){
-                    var promise = CameraRoll.saveToCameraRoll("file://" + downloadDest);
-                    promise.then(function(result) {
-                      console.log("图片已保存至相册")
-                      alength = alengt + 1
-                      if(v.item.imgs.split(',').length == alength){
-                        Clipboard.setString(v.item.name)
-                        WeChat.openWXApp()
-                      }
-                    }).catch(function(error) {
-                      // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
-                      console.log("保存失败",error)
-                    })
-                  }
-                })
+                downloadImgs.push(`http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[i]}`)
               }
+              var pathName = new Date().getTime() + ".png"
+              RNFS.downloadFile({
+                fromUrl:downloadImgs[0],
+                toFile:`${storeLocation}/${pathName}`
+              }).promise.then(res => {
+                if(res && res.statusCode === 200){
+                  console.log(res)
+                  CameraRoll.saveToCameraRoll("file://" + `${storeLocation}/${pathName}`).then(function(result) {
+                    console.log("图片已保存至相册")
+                    alength = alength + 1
+                    const _per=100/_this.state.allImg
+                    _this.setState({percent:_per,downloaded:1})
+                    if(v.item.imgs.split(',').length == alength){
+                      _this.setState({modal1:false})
+                      Clipboard.setString(v.item.name)
+                      WeChat.openWXApp()
+                      return
+                    }
+                    pathName = new Date().getTime() + ".png"
+                    RNFS.downloadFile({
+                      fromUrl:downloadImgs[1],
+                      toFile:`${storeLocation}/${pathName}`
+                    }).promise.then(res => {
+                      if(res && res.statusCode === 200){
+                        console.log(res)
+                        CameraRoll.saveToCameraRoll("file://" + `${storeLocation}/${pathName}`).then(function(result) {
+                          console.log("图片已保存至相册")
+                          alength = alength + 1
+                          const _per=200/_this.state.allImg
+                          _this.setState({percent:_per,downloaded:2})
+                          if(v.item.imgs.split(',').length == alength){
+                            _this.setState({modal1:false})
+                            Clipboard.setString(v.item.name)
+                            WeChat.openWXApp()
+                            return
+                          }
+                          pathName = new Date().getTime() + ".png"
+                          RNFS.downloadFile({
+                            fromUrl:downloadImgs[2],
+                            toFile:`${storeLocation}/${pathName}`
+                          }).promise.then(res => {
+                            if(res && res.statusCode === 200){
+                              console.log(res)
+                              CameraRoll.saveToCameraRoll("file://" + `${storeLocation}/${pathName}`).then(function(result) {
+                                console.log("图片已保存至相册")
+                                alength = alength + 1
+                                const _per=300/_this.state.allImg
+                                _this.setState({percent:_per,downloaded:3})
+                                if(v.item.imgs.split(',').length == alength){
+                                  _this.setState({modal1:false})
+                                  Clipboard.setString(v.item.name)
+                                  WeChat.openWXApp()
+                                  return
+                                }
+                                pathName = new Date().getTime() + ".png"
+                                RNFS.downloadFile({
+                                  fromUrl:downloadImgs[3],
+                                  toFile:`${storeLocation}/${pathName}`
+                                }).promise.then(res => {
+                                  if(res && res.statusCode === 200){
+                                    console.log(res)
+                                    CameraRoll.saveToCameraRoll("file://" + `${storeLocation}/${pathName}`).then(function(result) {
+                                      console.log("图片已保存至相册")
+                                      alength = alength + 1
+                                      const _per=400/_this.state.allImg
+                                      _this.setState({percent:_per,downloaded:4})
+                                      if(v.item.imgs.split(',').length == alength){
+                                        _this.setState({modal1:false})
+                                        Clipboard.setString(v.item.name)
+                                        WeChat.openWXApp()
+                                        return
+                                      }
+                                      pathName = new Date().getTime() + ".png"
+                                      RNFS.downloadFile({
+                                        fromUrl:downloadImgs[4],
+                                        toFile:`${storeLocation}/${pathName}`
+                                      }).promise.then(res => {
+                                        if(res && res.statusCode === 200){
+                                          console.log(res)
+                                          CameraRoll.saveToCameraRoll("file://" + `${storeLocation}/${pathName}`).then(function(result) {
+                                            console.log("图片已保存至相册")
+                                            const _per=500/_this.state.allImg
+                                            _this.setState({percent:_per,downloaded:5})
+                                            alength = alength + 1
+                                            if(v.item.imgs.split(',').length == alength){
+                                              _this.setState({modal1:false})
+                                              Clipboard.setString(v.item.name)
+                                              WeChat.openWXApp()
+                                              return
+                                            }
+                                            pathName = new Date().getTime() + ".png"
+                                            RNFS.downloadFile({
+                                              fromUrl:downloadImgs[5],
+                                              toFile:`${storeLocation}/${pathName}`
+                                            }).promise.then(res => {
+                                              if(res && res.statusCode === 200){
+                                                console.log(res)
+                                                CameraRoll.saveToCameraRoll("file://" + `${storeLocation}/${pathName}`).then(function(result) {
+                                                  console.log("图片已保存至相册")
+                                                  alength = alength + 1
+                                                  const _per=600/_this.state.allImg
+                                                  _this.setState({percent:_per,downloaded:6})
+                                                  if(v.item.imgs.split(',').length == alength){
+                                                    _this.setState({modal1:false})
+                                                    Clipboard.setString(v.item.name)
+                                                    WeChat.openWXApp()
+                                                    return
+                                                  }
+                                                  pathName = new Date().getTime() + ".png"
+                                                  RNFS.downloadFile({
+                                                    fromUrl:downloadImgs[6],
+                                                    toFile:`${storeLocation}/${pathName}`
+                                                  }).promise.then(res => {
+                                                    if(res && res.statusCode === 200){
+                                                      console.log(res)
+                                                      CameraRoll.saveToCameraRoll("file://" + `${storeLocation}/${pathName}`).then(function(result) {
+                                                        console.log("图片已保存至相册")
+                                                        alength = alength + 1
+                                                        const _per=700/_this.state.allImg
+                                                        _this.setState({percent:_per,downloaded:7})
+                                                        if(v.item.imgs.split(',').length == alength){
+                                                          _this.setState({modal1:false})
+                                                          Clipboard.setString(v.item.name)
+                                                          WeChat.openWXApp()
+                                                          return
+                                                        }
+                                                        pathName = new Date().getTime() + ".png"
+                                                        RNFS.downloadFile({
+                                                          fromUrl:downloadImgs[7],
+                                                          toFile:`${storeLocation}/${pathName}`
+                                                        }).promise.then(res => {
+                                                          if(res && res.statusCode === 200){
+                                                            console.log(res)
+                                                            CameraRoll.saveToCameraRoll("file://" + `${storeLocation}/${pathName}`).then(function(result) {
+                                                              console.log("图片已保存至相册")
+                                                              alength = alength + 1
+                                                              const _per=800/_this.state.allImg
+                                                              _this.setState({percent:_per,downloaded:8})
+                                                              if(v.item.imgs.split(',').length == alength){
+                                                                _this.setState({modal1:false})
+                                                                Clipboard.setString(v.item.name)
+                                                                WeChat.openWXApp()
+                                                                return
+                                                              }
+                                                              pathName = new Date().getTime() + ".png"
+                                                              RNFS.downloadFile({
+                                                                fromUrl:downloadImgs[8],
+                                                                toFile:`${storeLocation}/${pathName}`
+                                                              }).promise.then(res => {
+                                                                if(res && res.statusCode === 200){
+                                                                  console.log(res)
+                                                                  CameraRoll.saveToCameraRoll("file://" + `${storeLocation}/${pathName}`).then(function(result) {
+                                                                    console.log("图片已保存至相册")
+                                                                    alength = alength + 1
+                                                                    const _per=900/_this.state.allImg
+                                                                    _this.setState({percent:_per,downloaded:9})
+                                                                    if(v.item.imgs.split(',').length == alength){
+                                                                      _this.setState({modal1:false})
+                                                                      Clipboard.setString(v.item.name)
+                                                                      WeChat.openWXApp()
+                                                                      return
+                                                                    }
+                                                                  })
+                                                                }
+                                                              })
+                                                            })
+                                                          }
+                                                        })
+                                                      })
+                                                    }
+                                                  })
+                                                })
+                                              }
+                                            })
+                                          })
+                                        }
+                                      })
+                                    })
+                                  }
+                                })
+                              })
+                            }
+                          })
+                        })
+                      }
+                    })
+                  })
+                }
+              })
+              // for(let i in v.item.imgs.split(',')){
+              //   let pathName = new Date().getTime() + ".png"
+              //   let downloadDest = `${storeLocation}/${pathName}`;
+              //   const ret = RNFS.downloadFile({
+              //     fromUrl:`http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[i]}`,
+              //     toFile:downloadDest
+              //   });
+              //   ret.promise.then(res => {
+              //     if(res && res.statusCode === 200){
+              //       this.state.downloadImgs.push("file://" + downloadDest)
+              //       console.log("imgs",downloadImgs)
+              //       // var promise = CameraRoll.saveToCameraRoll("file://" + downloadDest);
+              //       // promise.then(function(result) {
+              //       //   console.log("图片已保存至相册")
+              //       //   alength = alength + 1
+              //       //   if(v.item.imgs.split(',').length == alength){
+              //       //     Clipboard.setString(v.item.name)
+              //       //     WeChat.openWXApp()
+              //       //   }
+              //       // }).catch(function(error) {
+              //       //   // Alert.alert("分享失败","请在'系统设置'中打开'存储权限'后再进行分享!")
+              //       //   console.log("保存失败",error)
+              //       // })
+              //     }
+              //   })
+              // }
+              
             }else{
               console.log('LibraryDirectoryPath=' + RNFS.LibraryDirectoryPath)
               var ilength = 0
