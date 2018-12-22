@@ -3,7 +3,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, } from 'react-native'
 
-import { SwipeAction, } from 'antd-mobile-rn'
+import { SwipeAction, } from '@ant-design/react-native'
 
 import XyTag from './XyTag'
 

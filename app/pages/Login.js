@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, AsyncStorage } from 'react-native';
-import { Button, List, InputItem, Toast } from 'antd-mobile-rn';
+import { Button, List, InputItem, Toast } from '@ant-design/react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Dimensions from 'Dimensions';
 
@@ -41,7 +41,7 @@ export default class Login extends Component<Props> {
           style={{ height: Dimensions.get('window').height - $xy.statusBarH - $xy.navH - 44 - $xy.homeBarH }}
         >
           <View style={{marginTop:$xy.statusBarH + $xy.navH,display:"flex",alignItems:"center"}}>
-            <Image style={{height:240,width:375}} source={LocalImg['suichu_t']}/>
+            <Image style={{height:240,width:375,marginTop:20}} source={LocalImg['suichu_t']}/>
             <Text style={{fontSize:24,marginBottom:22,color:'#44A754'}}>销 售 登 录</Text>
             <List style={{width:'72%',marginTop:10}}>
               <InputItem

@@ -3,7 +3,7 @@
 import React from 'react'
 import { Text, View, FlatList, } from 'react-native'
 
-import { SwipeAction, } from 'antd-mobile-rn'
+import { SwipeAction, } from '@ant-design/react-native'
 
 import $xy from '../styles/xyui'
 

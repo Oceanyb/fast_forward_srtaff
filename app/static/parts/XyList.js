@@ -3,7 +3,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 
-import { List, InputItem, TextareaItem, Picker, SwipeAction } from 'antd-mobile-rn'
+import { List, InputItem, TextareaItem, Picker, SwipeAction } from '@ant-design/react-native'
 const Brief = List.Item.Brief
 
 import ChildrenToFun from '../libs/ChildrenToFun'

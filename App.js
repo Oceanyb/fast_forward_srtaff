@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react'
 import { StatusBar, } from 'react-native'
+import { Provider } from '@ant-design/react-native'
 import Index from './app/pages/Index'
 
 type Props = {};
@@ -19,7 +20,9 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <Index />
+      <Provider>
+        <Index />
+      </Provider>
     );
   }
 }

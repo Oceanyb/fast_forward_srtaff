@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Image, ScrollView, Modal, TouchableWithoutFeedback } from 'react-native'
-import { Button, Card } from 'antd-mobile-rn'
+import { Button, Card } from '@ant-design/react-native'
+import Dimensions from 'Dimensions';
 
 import { XyNavBar } from '../static/libs/MiniXy'
 import _api from '../static/libs/apiRequest'
@@ -22,7 +23,7 @@ export default class GoodDetail extends Component<Props> {
       details:{},
       imgs:[],
       imgsView:[],
-      imgsTest:[{url:'http://img.zcool.cn/community/01639e559dec1232f875370ae2497f.jpg'},{url:'http://img.zcool.cn/community/0170c6559deb7d6ac7257aea5a1a93.jpg'},{url:'http://img.zcool.cn/community/018f19559deb796ac7257aea2d2084.jpg'}]
+      height:0
     }
   }
 
@@ -59,7 +60,7 @@ export default class GoodDetail extends Component<Props> {
               <Text style={{fontSize:20,margin:16}}>商品详情</Text>
               {this.state.imgs.map((item,index) =>
                 <TouchableWithoutFeedback onPress={() => this.imgClick(index)}  key={index}>
-                  <Image source={{uri:item.url}} style={{height:667,margin:5}}/>    
+                  <Image source={{uri:item.url}} style={{height:this.state.height,margin:5}}/>    
                 </TouchableWithoutFeedback>
               )}
             </View>
@@ -89,13 +90,26 @@ export default class GoodDetail extends Component<Props> {
   }
   componentDidMount = () => {
     console.log("||||",this.props)
+    const _this = this
     const goodDetails = this.props.navigation.state.params.goodDetails
     console.log("||||||||",goodDetails)
     const imgs = []
     const imgsView = []
+    const sWidth = Dimensions.get('window').width
     for(const i in goodDetails.imgs.split(',')){
       const v = goodDetails.imgs.split(',')[i]
-      imgs.push({url:`http://aisuichu.com:7001/public/upload/${v}`, id: new Date().getTime(), data: '', fileName: v })
+      const url = `http://aisuichu.com:7001/public/upload/${v}`
+      Image.getSize(url,(width,height) => {
+        if(width > sWidth){
+          const scale = width / sWidth
+          var fHeight = height / scale
+          _this.setState({height:fHeight})
+        }else{
+          var fHeight = height
+          _this.setState({height:fHeight})
+        }
+      })
+      imgs.push({url:url})
       imgsView.push({url:`http://aisuichu.com:7001/public/upload/${v}`})
     }
     this.setState({
@@ -103,10 +117,7 @@ export default class GoodDetail extends Component<Props> {
       imgs,
       imgsView
     })
-    console.log('ig',this.state.imgsView)
-  }
-  imgSize = () => {
-    Image.getSize('http://img.zcool.cn/community/0170c6559deb7d6ac7257aea5a1a93.jpg',(width,height) => {})
+    // console.log('ig',this.state.imgsView)
   }
   imgClick = (v) => {
     this.setState({

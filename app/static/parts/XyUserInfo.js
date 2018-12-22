@@ -3,7 +3,7 @@
 import React from 'react'
 import { Text, View, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 
-import { TabBar, } from 'antd-mobile-rn'
+import { TabBar, } from '@ant-design/react-native'
 
 import $xy from '../styles/xyui'
 import $css from '../styles/css'
