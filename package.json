@@ -8,15 +8,17 @@
     "bundle-ios": "react-native bundle --entry-file index.js --bundle-output ./ios/bundle/index.ios.jsbundle --platform ios --assets-dest ./ios/bundle --dev false"
   },
   "dependencies": {
-    "@ant-design/react-native": "^3.0.3",
+    "@ant-design/react-native": "^3.0.5",
     "dimensions": "^0.1.0",
     "react": "16.6.1",
     "react-native": "0.57.5",
     "react-native-fs": "^2.12.1",
+    "react-native-gesture-handler": "^1.0.12",
     "react-native-image-zoom-viewer": "^2.2.23",
     "react-native-keyboard-aware-scroll-view": "^0.7.3",
+    "react-native-update": "^5.1.4",
     "react-native-wechat": "^1.9.10",
-    "react-navigation": "^2.18.2",
+    "react-navigation": "^3.0.9",
     "xu-api": "^1.1.1"
   },
   "devDependencies": {

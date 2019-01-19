@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -35,6 +36,8 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* fast_forward_staffTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* fast_forward_staffTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		2E5562937AF44FE9A5C9DEE2 /* antoutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DECE0FE3C3D94E9BAD413FDD /* antoutline.ttf */; };
+		2F17195C649E4F6BB2868EFD /* antfill.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24C5B3F0AD7E4EBD962D6BE1 /* antfill.ttf */; };
 		42A9A98821A590A900C12500 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A98721A590A900C12500 /* libz.tbd */; };
 		42A9A98A21A590C200C12500 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A98921A590C200C12500 /* libc++.tbd */; };
 		42A9A98C21A590E400C12500 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A98B21A590E400C12500 /* libsqlite3.0.tbd */; };
@@ -42,13 +45,14 @@
 		42A9A99021A5910F00C12500 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A98F21A5910F00C12500 /* SystemConfiguration.framework */; };
 		42A9A9E421A95C1500C12500 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A9E321A95BD800C12500 /* libRCTCameraRoll.a */; };
 		42CE998221AF9CB700ED8B75 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 42CE995621AF9CB700ED8B75 /* bundle */; };
-		5B3123A9F53244859DD58F6F /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C7D1F5EE84BAFA1BB30FE /* libRNFS.a */; };
+		42F7111121E0481E00EEEF03 /* libRCTHotUpdate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F7111021E047FC00EEEF03 /* libRCTHotUpdate.a */; };
+		42F7111221E0482B00EEEF03 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F70FF921D66A2300EEEF03 /* libRNGestureHandler.a */; };
+		42F7111321E0484100EEEF03 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A9DB21A9597600C12500 /* libRNFS.a */; };
+		42F7111421E0484D00EEEF03 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9A98421A58E8400C12500 /* libRCTWeChat.a */; };
+		42F7111621E0485900EEEF03 /* libbz2.1.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F7111521E0485900EEEF03 /* libbz2.1.0.tbd */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		90E115CA805449AA9645FB24 /* RCTWeChatTests.xctest in Frameworks */ = {isa = PBXBuildFile; fileRef = 967CF54CA0F24D5A95953927 /* RCTWeChatTests.xctest */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		D8F1A9D71EC142CEA1BBA130 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F1904475134B5F8448EC59 /* libRCTWeChat.a */; };
-		2F17195C649E4F6BB2868EFD /* antfill.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24C5B3F0AD7E4EBD962D6BE1 /* antfill.ttf */; };
-		2E5562937AF44FE9A5C9DEE2 /* antoutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DECE0FE3C3D94E9BAD413FDD /* antoutline.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -332,6 +336,20 @@
 			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
 			remoteInfo = RCTCameraRoll;
 		};
+		42F70FF821D66A2300EEEF03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 804FBC7B52E44B088323BA7D /* RNGestureHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNGestureHandler;
+		};
+		42F7110F21E047FC00EEEF03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B36CC250ACEE4173B1127085 /* RCTHotUpdate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 91C5EFFF1C76ECA90037E727;
+			remoteInfo = RCTHotUpdate;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -389,6 +407,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = fast_forward_staff/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = fast_forward_staff/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		24C5B3F0AD7E4EBD962D6BE1 /* antfill.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = antfill.ttf; path = "../node_modules/@ant-design/icons-react-native/fonts/antfill.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* fast_forward_staff-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fast_forward_staff-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* fast_forward_staff-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "fast_forward_staff-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -401,16 +420,20 @@
 		42A9A9DE21A95BD800C12500 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		42CE995621AF9CB700ED8B75 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		42EF8BBD21AAB641000D6BB9 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		42F7111521E0485900EEEF03 /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		804FBC7B52E44B088323BA7D /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		85AEB99B7B4A4C1AA78BA450 /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
 		967CF54CA0F24D5A95953927 /* RCTWeChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RCTWeChatTests.xctest; sourceTree = "<group>"; };
+		A2D5201A616A418D82C8D4AB /* libRCTHotUpdate.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTHotUpdate.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B167385FBC9A47E1A827F5AD /* RNFS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
+		B36CC250ACEE4173B1127085 /* RCTHotUpdate.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTHotUpdate.xcodeproj; path = "../node_modules/react-native-update/ios/RCTHotUpdate.xcodeproj"; sourceTree = "<group>"; };
 		B8F1904475134B5F8448EC59 /* libRCTWeChat.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTWeChat.a; sourceTree = "<group>"; };
-		24C5B3F0AD7E4EBD962D6BE1 /* antfill.ttf */ = {isa = PBXFileReference; name = "antfill.ttf"; path = "../node_modules/@ant-design/icons-react-native/fonts/antfill.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DECE0FE3C3D94E9BAD413FDD /* antoutline.ttf */ = {isa = PBXFileReference; name = "antoutline.ttf"; path = "../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DECE0FE3C3D94E9BAD413FDD /* antoutline.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = antoutline.ttf; path = "../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf"; sourceTree = "<group>"; };
+		F3578568477D43D294A2EEA6 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -426,6 +449,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42F7111621E0485900EEEF03 /* libbz2.1.0.tbd in Frameworks */,
+				42F7111421E0484D00EEEF03 /* libRCTWeChat.a in Frameworks */,
+				42F7111321E0484100EEEF03 /* libRNFS.a in Frameworks */,
+				42F7111221E0482B00EEEF03 /* libRNGestureHandler.a in Frameworks */,
+				42F7111121E0481E00EEEF03 /* libRCTHotUpdate.a in Frameworks */,
 				42A9A9E421A95C1500C12500 /* libRCTCameraRoll.a in Frameworks */,
 				42A9A99021A5910F00C12500 /* SystemConfiguration.framework in Frameworks */,
 				42A9A98E21A590FC00C12500 /* CoreTelephony.framework in Frameworks */,
@@ -444,9 +472,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				D8F1A9D71EC142CEA1BBA130 /* libRCTWeChat.a in Frameworks */,
 				90E115CA805449AA9645FB24 /* RCTWeChatTests.xctest in Frameworks */,
-				5B3123A9F53244859DD58F6F /* libRNFS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +622,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42F7111521E0485900EEEF03 /* libbz2.1.0.tbd */,
 				42A9A98F21A5910F00C12500 /* SystemConfiguration.framework */,
 				42A9A98D21A590FC00C12500 /* CoreTelephony.framework */,
 				42A9A98B21A590E400C12500 /* libsqlite3.0.tbd */,
@@ -612,6 +639,8 @@
 				B8F1904475134B5F8448EC59 /* libRCTWeChat.a */,
 				967CF54CA0F24D5A95953927 /* RCTWeChatTests.xctest */,
 				388C7D1F5EE84BAFA1BB30FE /* libRNFS.a */,
+				F3578568477D43D294A2EEA6 /* libRNGestureHandler.a */,
+				A2D5201A616A418D82C8D4AB /* libRCTHotUpdate.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -650,6 +679,31 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		42F70FF521D66A2300EEEF03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42F70FF921D66A2300EEEF03 /* libRNGestureHandler.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		42F7110C21E047FC00EEEF03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42F7111021E047FC00EEEF03 /* libRCTHotUpdate.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		457A49E5BAFF4D15B6461D98 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				24C5B3F0AD7E4EBD962D6BE1 /* antfill.ttf */,
+				DECE0FE3C3D94E9BAD413FDD /* antoutline.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,6 +740,8 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				85AEB99B7B4A4C1AA78BA450 /* RCTWeChat.xcodeproj */,
 				B167385FBC9A47E1A827F5AD /* RNFS.xcodeproj */,
+				804FBC7B52E44B088323BA7D /* RNGestureHandler.xcodeproj */,
+				B36CC250ACEE4173B1127085 /* RCTHotUpdate.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -735,16 +791,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		457A49E5BAFF4D15B6461D98 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				24C5B3F0AD7E4EBD962D6BE1 /* antfill.ttf */,
-				DECE0FE3C3D94E9BAD413FDD /* antoutline.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -887,6 +933,10 @@
 					ProjectRef = 00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */;
 				},
 				{
+					ProductGroup = 42F7110C21E047FC00EEEF03 /* Products */;
+					ProjectRef = B36CC250ACEE4173B1127085 /* RCTHotUpdate.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302BC1ABCB91800DB3ED1 /* Products */;
 					ProjectRef = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
 				},
@@ -925,6 +975,10 @@
 				{
 					ProductGroup = 42A9A9D621A9597500C12500 /* Products */;
 					ProjectRef = B167385FBC9A47E1A827F5AD /* RNFS.xcodeproj */;
+				},
+				{
+					ProductGroup = 42F70FF521D66A2300EEEF03 /* Products */;
+					ProjectRef = 804FBC7B52E44B088323BA7D /* RNGestureHandler.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1204,6 +1258,20 @@
 			remoteRef = 42EF8BC721AAB641000D6BB9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		42F70FF921D66A2300EEEF03 /* libRNGestureHandler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGestureHandler.a;
+			remoteRef = 42F70FF821D66A2300EEEF03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		42F7111021E047FC00EEEF03 /* libRCTHotUpdate.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTHotUpdate.a;
+			remoteRef = 42F7110F21E047FC00EEEF03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1385,12 +1453,16 @@
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-wechatios",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 				);
 				INFOPLIST_FILE = fast_forward_staffTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1415,12 +1487,16 @@
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-wechatios",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 				);
 				INFOPLIST_FILE = fast_forward_staffTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1446,8 +1522,14 @@
 				DEVELOPMENT_TEAM = 783B5LZJ54;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules\neact-native-wechatios",
-					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-wechatios",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 				);
 				INFOPLIST_FILE = fast_forward_staff/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1475,8 +1557,14 @@
 				DEVELOPMENT_TEAM = 783B5LZJ54;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)..\node_modules\neact-native-wechatios",
-					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-wechatios",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 				);
 				INFOPLIST_FILE = fast_forward_staff/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1510,11 +1598,15 @@
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-wechatios",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 				);
 				INFOPLIST_FILE = "fast_forward_staff-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1547,11 +1639,15 @@
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-wechatios",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 				);
 				INFOPLIST_FILE = "fast_forward_staff-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1583,11 +1679,15 @@
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-wechatios",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 				);
 				INFOPLIST_FILE = "fast_forward_staff-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1619,11 +1719,15 @@
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-wechatios",
 					"$(SRCROOT)..\node_modules\neact-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 				);
 				INFOPLIST_FILE = "fast_forward_staff-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

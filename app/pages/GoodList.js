@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, FlatList, Image, TouchableWithoutFeedback, AsyncStorage, CameraRoll, Platform, PermissionsAndroid, Alert, Clipboard } from 'react-native'
-import { TabBar, Button, Card, Toast, Stepper, Modal, Progress, ActionSheet } from '@ant-design/react-native'
+import { TabBar, Button, Card, Toast, Stepper, Modal, Progress, ActionSheet, Icon } from '@ant-design/react-native'
 import * as WeChat from 'react-native-wechat'
 import RNFS from 'react-native-fs'
 
@@ -22,7 +22,7 @@ export default class Home extends Component<Props> {
       ...props,
       detail:'有保修期,超级优势,优势价格,大内存iPhoneX 256g,白色美版两网无锁移动联通双4g,成色98左右,超级优势,优势价格 4869',
       goodData:[],
-      user:{},
+      shopId:'',
       modal:false,
       percent:0,
       allImg:'',
@@ -34,11 +34,13 @@ export default class Home extends Component<Props> {
     console.log(this.state.goodData)
     const _goodData=this.state.goodData
     const { navigate } = this.props.navigation
-    if(this.state.user.shop_id){
+    if(this.state.shopId){
       return (
-        <View style={{ height:"100%"}}>
-          <XyNavBar bgc="#44A754" title="主页" left="退出" onLeftPress={()=> this.logOut()} style={{ position: 'absolute', width: '100%', zIndex: 999 }}>
-            <Button solt="right" type="primary" size="large" style={{borderRadius:0,backgroundColor:'#44A754',borderColor:'#44A754',height:42}} activeStyle={{backgroundColor:"#44A754",opacity:0.95}} onPressOut={ () => this.shareShop() } >分享店铺</Button>
+        <View style={{ height:"100%",backgroundColor:'#E1E1E1'}}>
+          <XyNavBar bgc="#44A754" title="店铺商品" left="back" nav={this.props.navigation} style={{ position: 'absolute', width: '100%', zIndex: 999 }}>
+            <Button solt="right" type="primary" size="large" style={{borderRadius:0,backgroundColor:'#44A754',borderColor:'#44A754',height:42,width:78}} activeStyle={{backgroundColor:"#44A754",opacity:0.95}} onPressOut={ () => this.shareShop() } >
+              <Icon name='share-alt' color='#fff'/>
+            </Button>
           </XyNavBar>
           <View style={{marginTop:$xy.statusBarH + $xy.navH,marginBottom:5}}>
             <FlatList
@@ -76,19 +78,19 @@ export default class Home extends Component<Props> {
           />
           <Card.Body>
             <View style={{flexDirection: 'row',justifyContent:'space-between', marginLeft: 16,marginRight:16}}>
-              <Image
-                source={{uri:`http://aisuichu.com:7001/public/upload/${item.item.imgs.split(',')[0]}`}}
-                style={{ width: 88, height: 88, borderRadius: 5 }}
-              />
-              <View style={{flexDirection: 'row',justifyContent:'flex-end',alignItems:'center',width:"50%"}}>
-                <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-start',height:88,marginRight:8}}>
-                  <Text style={{fontSize:18,color:'gray'}}>利润:{item.item.price_sale-item.item.price_agent}</Text>
-                  <Text style={{fontSize:18,color:'gray'}}>库存:{item.item.stock}</Text>
+              <View style={{flexDirection: 'row',alignItems:'center'}}>
+                <Image
+                  source={{uri:`http://aisuichu.com:7001/public/upload/${item.item.imgs.split(',')[0]}`}}
+                  style={{ width: 96, height: 96 }}
+                />
+                <View style={{justifyContent:'space-around',height:96,marginLeft:12}}>
+                  <Text style={{fontSize:22,color:'red' }}>￥{item.item.price_sale}</Text>
+                  <Text style={{fontSize:16,color:'gray'}}>利润: {item.item.price_sale-item.item.price_agent}</Text>
+                  <Text style={{fontSize:16,color:'gray'}}>库存: {item.item.stock}</Text>
                 </View>
-                <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:88}}>
-                  <Text style={{color:'red',fontSize:24 }}>￥{item.item.price_sale}</Text>
-                  <Button type='primary' style={{height:34,width:82,borderColor:'#44A754',backgroundColor:'#44A754'}} activeStyle={{backgroundColor:"#44A754",opacity:0.95}} onPressOut={() => this.shareGoods(item)}>分 享</Button>
-                </View>
+              </View>
+              <View style={{flexDirection: 'column',justifyContent:'space-around',alignItems:'flex-end',height:96}}>
+                <Button type='ghost'  size="large" style={{borderRadius:10,borderColor:'#44A754',height:28}} activeStyle={{backgroundColor:"#44A754",opacity:0.1}} onPressOut={() => this.shareGoods(item)}><Text style={{color:'#44A754'}}>分享</Text></Button>
               </View>
             </View>
           </Card.Body>
@@ -97,7 +99,6 @@ export default class Home extends Component<Props> {
     )
   }
   componentDidMount = async () => {
-    console.log('props',this.props)
     this.getData()
     if(Platform.OS === 'android'){
       try {
@@ -112,51 +113,16 @@ export default class Home extends Component<Props> {
       }
     }
   }
-  logOut = () => {
-    const _this = this
-    Modal.alert('确认退出？', '', [
-      { text: '取消', onPress: () => {} },
-      { text: '确认', onPress: async () => {
-          await AsyncStorage.removeItem('user', function (error) {
-            if (error) {
-              console.log('删除失败')
-            }else {
-              console.log('删除完成')
-              _this.state.navigation.replace('Home')    
-            }
-          })
-        }
-      },
-    ]);
-  }
   refreshing = () => {
-    this.props.navigation.replace('Home')
-  }
-  onChanged=(value)=>{
-    console.log('changed', value)
+    this.props.navigation.replace('GoodList')
   }
   getData = async () => {
-    console.log('storage',AsyncStorage.getItem('user'))
-    let user = ''
-    try {
-      user = JSON.parse(await AsyncStorage.getItem('user'))
-      if (!user) {
-        this.state.navigation.replace('Login')
-        return
-      }
-    } catch (e) {
-      console.log(e)
-    }
-    console.log('==',user.shop_id)
-    const res = await _api.get('/moment.onsale',{
-      shop_id:user.shop_id
-     })
-    console.log(res)
-    if(res){
-      this.setState({
-        user:user,
-        goodData:res
-      })
+    const shopId = JSON.parse(await AsyncStorage.getItem('staff')).shop_id
+    const goods = await _api.get('/moment.onsale',{
+      shop_id: shopId
+    })
+    if(goods){
+      this.setState({shopId,goodData:goods})      
     }
   }
   shareShop = () => {
@@ -181,7 +147,7 @@ export default class Home extends Component<Props> {
                   description: '点击查看今日最新库存',
                   thumbImage: `http://aisuichu.com:7001/public/upload/${this.state.goodData[0].imgs.split(',')[0]}`,
                   type: 'news',
-                  webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
+                  webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.shopId}`
                 })
               }else if(buttonIndex==1){
                 WeChat.shareToTimeline({
@@ -189,7 +155,7 @@ export default class Home extends Component<Props> {
                   description: '点击查看今日最新库存',
                   thumbImage: `http://aisuichu.com:7001/public/upload/${this.state.goodData[0].imgs.split(',')[0]}`,
                   type: 'news',
-                  webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.user.shop_id}`
+                  webpageUrl: `http://aisuichu.com:8083/#/Home?shopId=${this.state.shopId}`
                 })
               }else{}
             }
@@ -226,7 +192,7 @@ export default class Home extends Component<Props> {
                   description: '------------' + '\n' + '售价：' + v.item.price_sale + '\n' + '点击查看更多详情',
                   thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
                   type: 'news',
-                  webpageUrl: `http://aisuichu.com:8083/#/GoodDetail?shopId=${this.state.user.shop_id}&goodId=${v.item.id}`
+                  webpageUrl: `http://aisuichu.com:8083/#/GoodDetail?shopId=${this.state.shopId}&goodId=${v.item.id}`
                 })
               }else if(buttonIndex==1){
                 Clipboard.setString(v.item.name)
@@ -234,7 +200,7 @@ export default class Home extends Component<Props> {
                   title:v.item.name,
                   thumbImage: `http://aisuichu.com:7001/public/upload/${v.item.imgs.split(',')[0]}`,
                   type: 'news',
-                  webpageUrl: `http://aisuichu.com:8083/#/GoodDetail?shopId=${this.state.user.shop_id}&goodId=${v.item.id}`
+                  webpageUrl: `http://aisuichu.com:8083/#/GoodDetail?shopId=${this.state.shopId}&goodId=${v.item.id}`
                 })
               }else if(buttonIndex==2){
                 this.setState({

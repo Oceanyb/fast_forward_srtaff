@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Image, AsyncStorage } from 'react-native';
-import { Button, List, InputItem, Toast } from '@ant-design/react-native';
+import { Button, List, InputItem, Toast, Icon } from '@ant-design/react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Dimensions from 'Dimensions';
 
@@ -47,26 +47,28 @@ export default class Login extends Component<Props> {
               <InputItem
                 clear
                 type="number"
-                placeholder="员工手机号"
+                placeholder="手机号"
+                labelNumber={2}
                 onChange={(v) => {
                   this.setState({
                     phone: v,
                   });
                 }}
               >
-                <Text>手机号:</Text>
+                <Icon name='mobile' />
               </InputItem>
               <InputItem
                 clear
                 type="number"
-                placeholder="店铺手机号"
+                placeholder="店铺号"
+                labelNumber={2}
                 onChange={(v) => {
                   this.setState({
                     shop: v,
                   });
                 }}
               >
-                <Text>店铺号:</Text>
+                <Icon name='key' />
               </InputItem>
             </List>
             <Button type="primary" activeStyle={{backgroundColor:"#44A754",opacity:0.95}} inline style={{width:'60%',marginTop:30,backgroundColor:'#44A754',borderColor:'#44A754'}} onPressOut={()=>{this.login()} }>登  录</Button>
@@ -97,8 +99,8 @@ export default class Login extends Component<Props> {
       Toast.fail('请检查手机号是否正确!');
     } else {
       Toast.success('登录成功', 0.5);
-      AsyncStorage.setItem('user', JSON.stringify(res))
-      this.props.navigation.replace('Home')
+      AsyncStorage.setItem('staff', JSON.stringify(res))
+      this.props.navigation.replace('TabNav')
     }
   }
 }
